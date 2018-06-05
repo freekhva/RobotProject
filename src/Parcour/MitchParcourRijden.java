@@ -22,7 +22,6 @@ public class MitchParcourRijden {
 		float ambient;
 		float white;
 		float black;
-		float test;
 		
 		// create two motor objects to control the motors.
         UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
