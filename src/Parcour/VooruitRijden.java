@@ -1,4 +1,4 @@
-package basisoefeningen;
+package Parcour;
 
 	import lejos.hardware.Button;
 	import lejos.hardware.Sound;
