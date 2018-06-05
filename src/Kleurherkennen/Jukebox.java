@@ -1,6 +1,6 @@
 package Kleurherkennen;
 
-//import lejos.nxt.Sound;
+import lejos.hardware.Sound;
 
 /*                                                         @version Nov. 2008
  *                                                         @author Bert Wachsmuth
@@ -94,6 +94,15 @@ public class Jukebox extends Thread
 		};
 
 	// More melodies
+	
+	final static int ATEAM_THEME[][] = 
+		{
+				
+				{F5, BEAT}, {C5, 4*BEAT},	{F5, BEAT},
+				{F5, BEAT}, {F5, 1*BEAT}
+		};
+	
+	
 	final static int JAWS[][] = 
 		{
 			{D5, BEAT}, {DIS5, BEAT}, {D5, BEAT}, {E5, BEAT}
