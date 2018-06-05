@@ -100,7 +100,7 @@ public class Jukebox extends Thread
 		{
 				
 				{F5, BEAT}, {C5, 4*BEAT},	{F5, BEAT},
-				{F5, BEAT}, {F5, 1*BEAT}
+				{F5, BEAT}, {F5, 1*BEAT} // meer toevoegen
 		};
 	
 	
