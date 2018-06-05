@@ -62,6 +62,13 @@ public class ParcourRijden {
 				motorR.setPower( FULL_POWER );
 			}
 		}
+		
+		// Motor stop and close
+		motorL.stop();
+		motorR.stop();
+		
+		motorL.close();
+		motorR.close();
 
 //			function CALIBRATE
 //			

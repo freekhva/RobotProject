@@ -5,23 +5,17 @@ import lejos.hardware.Sound;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.*;
 import lejos.utility.Delay;
-import java.util.ArrayList;
-
 import basisoefeningen.ColorSensor;
 import basisoefeningen.Lcd;
-import lejos.hardware.port.Port;
-import lejos.hardware.sensor.EV3ColorSensor;
-import lejos.robotics.Color;
-import lejos.robotics.ColorDetector;
-import lejos.robotics.ColorIdentifier;
 
 public class TestRijden {
 
 	public static void main(String[] args) {
 		ColorSensor color = new ColorSensor(SensorPort.S3);
 		String currentColor;
-		
-		System.out.println("Drive Forward\nand Stop\n");
+		Boolean start = true;
+
+		System.out.println("Drive Forward if black\nand Stop\n");
 		System.out.println("Press any key to start");
 
 		Button.LEDPattern(4); // flash green led and
@@ -38,30 +32,58 @@ public class TestRijden {
 
 		color.setColorIdMode();
 		color.setFloodLight(false);
-		
+
 		// zwarte lijn herkennen?
-		// color.fetchSample(, 0);
-		do {	
+
+		Delay.msDelay(250);
+		currentColor = ColorSensor.colorName(color.getColorID());
+		while (start == true) {
 			Lcd.clear(7);
 			Lcd.print(7, "id=%s", ColorSensor.colorName(color.getColorID()));
 			Delay.msDelay(250);
 			currentColor = ColorSensor.colorName(color.getColorID());
-		} while (!currentColor.equals("Red"));
+			if (currentColor.equals("Black")) {
+				Lcd.print(8, "%s is gevonden, lets go!", currentColor);
+				motorC.setPower(20);
+				motorB.setPower(20);
+//				currentColor = ColorSensor.colorName(color.getColorID());
+			} else {
+				Delay.msDelay(250);
+				motorC.stop();
+				motorB.stop();
+//				Lcd.clear(7);
+//				Lcd.print(7, "id=%s", ColorSensor.colorName(color.getColorID()));
+//				Delay.msDelay(250);
+//				currentColor = ColorSensor.colorName(color.getColorID());
+				start = false;
+			}
+		}
+		
+		
+/*	
+		do {
+			Lcd.clear(7);
+			Lcd.print(7, "id=%s", ColorSensor.colorName(color.getColorID()));
+			Delay.msDelay(250);
+			currentColor = ColorSensor.colorName(color.getColorID());
+		} while (!currentColor.equals("Black"));
 		Lcd.print(8, "%s is gevonden", currentColor);
 		motorC.setPower(50);
 		motorB.setPower(50);
 		Sound.beepSequence();
 		// wait 2 seconds.
-		Delay.msDelay(4000);
-
+		// Delay.msDelay(2000);
 		// stop motors with brakes on.
-		motorC.stop();
-		motorB.stop();
-
-		// free up motor resources.
-		motorC.close();
-		motorB.close();
-
-		Sound.beepSequence(); // we are done.
-	}
+		if (currentColor != "Black") {
+			motorC.stop();
+			motorB.stop();
+		} else {
+			motorC.forward();
+			motorB.forward();
+		}
+		Sound.beepSequence();
+		// we are done.
+		/*
+		 * motorC.stop(); motorB.stop(); motorC.close(); motorB.close();
+		 */}
 }
