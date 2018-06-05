@@ -12,7 +12,13 @@ public class MitchParcourRijden {
 	{
 		// Constants
 		final int FULL_POWER = 60;
-		final int NO_POWER = 10;		
+		final int NO_POWER = 10;	
+		// linker en rechter motor definieren
+		final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
+		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
+
+		
+		
 		
 		// Sensors
 		ColorSensor ambSensor = new ColorSensor(SensorPort.S3);
@@ -24,10 +30,7 @@ public class MitchParcourRijden {
 		float black;
 		float test;
 		
-		// create two motor objects to control the motors.
-        UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
-        UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
-		
+	
 		// Calibrate
 		System.out.println("White?");
 		Button.waitForAnyPress();
