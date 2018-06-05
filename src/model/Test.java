@@ -6,6 +6,6 @@ public class Test
 	
 	public Test()
 	{
-		this.blaa = 100;
+		this.blaa = 1004;
 	}
 }

@@ -1,4 +1,4 @@
-package Kleurherkennen;
+package Kleurherkennen_test;
 
 import basisoefeningen.ColorSensor;
 import basisoefeningen.Lcd;
