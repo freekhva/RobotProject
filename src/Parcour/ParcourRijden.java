@@ -67,6 +67,7 @@ public class ParcourRijden {
 		motorL.stop();
 		motorR.stop();
 		
+		// Motor close
 		motorL.close();
 		motorR.close();
 
