@@ -6,6 +6,7 @@ import lejos.hardware.Sound;
  *                                                         @author Bert Wachsmuth
  * 
  * <h1>Jukebox</h1>
+ *
  * 
  * This class defines notes as frequencies as well as various songs (defined as
  * 2-D arrays) and let's you play those songs in their own thread. A song can
