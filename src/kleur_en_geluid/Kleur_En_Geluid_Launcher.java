@@ -2,7 +2,7 @@ package kleur_en_geluid;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import Kleurherkennen.*;
 import basisoefeningen.ColorSensor;
 import basisoefeningen.Lcd;
 import lejos.hardware.port.Port;
@@ -61,6 +61,7 @@ public class Kleur_En_Geluid_Launcher {
 					Lcd.print(5, "Druk op escape om te stoppen");
 				}while (Button.ESCAPE.isUp());
 				
+				//afspelen van de ArrayList
 				Lcd.clear(5);
 				Lcd.print(5, "druk voor afspelen.");
 				Button.waitForAnyPress();
@@ -82,16 +83,22 @@ public class Kleur_En_Geluid_Launcher {
 				Button.waitForAnyPress();
 
 			}
-				
+		//afspelen van de juiste noten		
 	public static void Geluid(String kleur){
 		switch (kleur) {
-		case "Red": Sound.beep();
+		case "Red": Sound.playTone(880, 400); //A5
 			break;
-		case "Blue": Sound.beepSequenceUp();
-		break;	
-		case "Brown": Sound.buzz();
+		case "Blue": Sound.playTone(988, 400); //B5
+			break;	
+		case "Brown": Sound.playTone(523, 400); //C5
+			break;
+		case "Green": Sound.playTone(587, 400); //D5
 		break;
-		default: Sound.beepSequence();
+	case "White": Sound.playTone(659, 400); //E5
+		break;	
+	case "Black": Sound.playTone(698, 400); //F5
+		break;
+	case "Yellow": Sound.playTone(784, 400); //G5
 		break;
 		}
 	}
