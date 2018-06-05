@@ -99,10 +99,18 @@ public class Jukebox extends Thread
 	final static int ATEAM_THEME[][] = 
 		{
 				
-				{F5, BEAT}, {C5, 4*BEAT},	{F5, BEAT},
-				{F5, BEAT}, {F5, 1*BEAT} // meer toevoegen
+				{F6, BEAT}, {C6, 0,5*BEAT},	{F6, 0,5*BEAT},{F6, 2*BEAT}, 
+				{B6, 0,5*BEAT}, {C6, BEAT} , {F5, 0,5*BEAT} , {F5, BEAT},{A6, 0,25*BEAT},{C6, 0,25*BEAT},
+				{F6, 0,5*BEAT}, {C6, 0,5*BEAT},{G6, 0,5*BEAT},{F6, 0,5*BEAT},{F6, 2*BEAT},
+				
+				
+				
+				
+				
+				
+				// meer toevoegen
 		};
-	
+	//eerste stukje
 	
 	final static int JAWS[][] = 
 		{
