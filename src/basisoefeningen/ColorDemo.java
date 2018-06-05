@@ -79,7 +79,8 @@ public class ColorDemo
 
         Button.LEDPattern(4);
         Button.waitForAnyPress();
+        
     }
-
+    
 }
 
