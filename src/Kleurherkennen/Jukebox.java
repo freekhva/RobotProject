@@ -108,7 +108,7 @@ public class Jukebox extends Thread
 				
 				
 				
-				// meer toevoegen
+				// meer toevoegen, werkt nog niet, speelt nog maar 5 tonen af
 		};
 	//eerste stukje
 	
