@@ -83,8 +83,8 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 					//nog een oplossing voor blijven afspelen
 					Geluid(kleur, 1);
 					}
-					//Delay.msDelay(1000);
-				}while (Button.ESCAPE.isUp() || touch.isPressed());
+				}while (Button.ESCAPE.isUp());
+				//|| touch.isPressed()
 				
 				//Stop motoren
 				motorL.stop();
@@ -96,9 +96,9 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				Button.waitForAnyPress();
 				
 				for(int i = 1; i<test2.size(); i++) {
-					Geluid(test2.get(i).getKleur(),test2.get(i).getDuur() );
-					Lcd.clear(3);
-					Lcd.print(3, " %d isKleur=%s", i, test2.get(i).getKleur());
+				test2.get(i).Geluid();
+				Lcd.clear(3);
+				Lcd.print(3, " %d isKleur=%s", i, test2.get(i).getKleur());
 					Delay.msDelay(1000);
 				}
 					
@@ -118,7 +118,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 	public static void Geluid(String kleur, double duur){
 		 duur = duur*1000; 
 		switch (kleur) {
-		case "Red": Sound.playTone(880, (int)duur); //A5
+		case "Red": Sound.playTone( 880, (int)duur); //A5
 			break;
 		case "Blue": Sound.playTone(988, (int)duur); //B5
 			break;	
