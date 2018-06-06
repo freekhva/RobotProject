@@ -42,7 +42,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 								
 //				System.out.println("Kleur van geluid");
-				Lcd.print(1, "Druk op een toets");
+				Lcd.print(1, "Druk om te beginnen");
 
 				Button.LEDPattern(4); // flash green led and
 				Sound.beepSequenceUp(); // make sound when ready.
