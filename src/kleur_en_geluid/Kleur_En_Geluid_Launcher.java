@@ -2,7 +2,7 @@ package kleur_en_geluid;
 
 import java.util.ArrayList;
 import java.util.List;
-import Kleurherkennen.*;
+
 import basisoefeningen.ColorSensor;
 import basisoefeningen.Lcd;
 import lejos.hardware.port.MotorPort;
@@ -17,6 +17,7 @@ import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.Color;
 import lejos.utility.Delay;
+import muziek.*;
 import lejos.hardware.Brick;
 import lejos.hardware.BrickFinder;
 import lejos.hardware.lcd.Font;
@@ -37,9 +38,11 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 				ColorSensor color = new ColorSensor(SensorPort.S3);
 //				TouchSensor touch = new TouchSensor(SensorPort.S2);
+				
 
-				System.out.println("Kleur van geluid");
-				Lcd.print(2, "Druk op een toets");
+								
+//				System.out.println("Kleur van geluid");
+				Lcd.print(1, "Druk om te beginnen");
 
 				Button.LEDPattern(4); // flash green led and
 				Sound.beepSequenceUp(); // make sound when ready.
@@ -53,6 +56,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 				color.setColorIdMode();
 				color.setFloodLight(false);
+				
+				//kleursensor een meting laten doen om hem te initialiseren
+				kleur = ColorSensor.colorName(color.getColorID());
+				Lcd.print(2,"Beginkleur =" + kleur);
 
 		        
 		        //Starten opname
@@ -96,7 +103,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				Button.waitForAnyPress();
 				
 				for(int i = 1; i<test2.size(); i++) {
-				test2.get(i).Geluid();
+				test2.get(i).arrayGeluid();
 				Lcd.clear(3);
 				Lcd.print(3, " %d isKleur=%s", i, test2.get(i).getKleur());
 					Delay.msDelay(1000);

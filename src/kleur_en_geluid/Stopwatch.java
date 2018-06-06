@@ -17,7 +17,7 @@ public class Stopwatch {
 
 
 	public void setStartTijd(long startTijd) {
-		this.startTijd = startTijd;
+		this.startTijd = System.currentTimeMillis();
 	}
 
 	
