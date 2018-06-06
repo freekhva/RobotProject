@@ -27,7 +27,7 @@ public class MitchParcourRijden {
 		float ambient;
 		float white;
 		float black;
-		float test;
+		float test2;
 //		float midpointLeft;
 //		float midpointRight;
 		float correction;
