@@ -36,7 +36,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
 				ColorSensor color = new ColorSensor(SensorPort.S3);
-				TouchSensor touch = new TouchSensor((ADSensorPort) SensorPort.S2);
+//				TouchSensor touch = new TouchSensor(SensorPort.S2);
 
 				System.out.println("Kleur van geluid");
 				Lcd.print(2, "Druk op een toets");
