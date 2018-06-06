@@ -23,6 +23,13 @@ import lejos.hardware.BrickFinder;
 import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.UnregulatedMotor;
+import sensoren.*;
+import lejos.hardware.Button;
+import lejos.hardware.sensor.EV3TouchSensor;
+import lejos.hardware.sensor.SensorMode;
+
+
+
 
 public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
@@ -31,13 +38,14 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 				String kleur = "Grijs";
 				Stopwatch stopwatch =  new Stopwatch();
+				TouchSensor touch = new TouchSensor();
 				
 				
 				final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
 				final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
 				ColorSensor color = new ColorSensor(SensorPort.S3);
-//				TouchSensor touch = new TouchSensor(SensorPort.S2);
+
 				
 
 								
@@ -90,8 +98,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 					//nog een oplossing voor blijven afspelen
 					Geluid(kleur, 1);
 					}
-				}while (Button.ESCAPE.isUp());
+				}while (!touch.getTouchSensorAanUit() && Button.ESCAPE.isUp()); //  || !touch.getTouchSensorAanUit() Button.ESCAPE.isUp())
 				//|| touch.isPressed()
+				
+
 				
 				//Stop motoren
 				motorL.stop();
