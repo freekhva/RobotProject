@@ -11,8 +11,8 @@ public class MitchParcourRijden {
 	public static void main(String[] args) 
 	{
 		// Constants
-		final int FULL_POWER = 70;
-		final int NO_POWER = -10;	
+		final int FULL_POWER = 50;
+		final int NO_POWER = 25;	
 		// linker en rechter motor definieren
 		final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
 		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
