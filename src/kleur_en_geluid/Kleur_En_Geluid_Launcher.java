@@ -1,8 +1,6 @@
 package kleur_en_geluid;
 
 import java.util.ArrayList;
-import java.util.List;
-import Kleurherkennen.*;
 import basisoefeningen.ColorSensor;
 import basisoefeningen.Lcd;
 import lejos.hardware.port.MotorPort;
@@ -17,8 +15,6 @@ import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.Color;
 import lejos.utility.Delay;
-import lejos.hardware.Brick;
-import lejos.hardware.BrickFinder;
 import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.UnregulatedMotor;
@@ -28,7 +24,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 	public static void main(String[] args) {
 		// Aanmaken sensor en het opstarten riedeltje, motoren
 
-				String kleur = "Grijs";
+				String kleur;
 				Stopwatch stopwatch =  new Stopwatch();
 				ArrayList<KleurNaarGeluid> test2 = new ArrayList<>();
 				

@@ -2,15 +2,13 @@ package kleur_en_geluid;
 
 import basisoefeningen.Lcd;
 import lejos.hardware.Sound;
-import lejos.utility.Delay;
-import java.util.ArrayList;
-import java.util.List;
-import lejos.hardware.Sounds;
 
 
-public class KleurNaarGeluid implements Sounds{
+
+
+public class KleurNaarGeluid{
 	//dit voegt weinig toe op dit moment, maar het bestaat
-	//public final static int[] PIANO = new int[]{4, 25, 500, 7000, 5};
+
 	private String kleur;
 	private double duur;
 	
@@ -33,17 +31,17 @@ public class KleurNaarGeluid implements Sounds{
 		switch (kleur) {
 		case "Red": Sound.playNote(Sound.PIANO, 880, (int)duur); //A6
 			break;
-		case "Blue": Sound.playNote(PIANO, 988, (int)duur); //B5
+		case "Blue": Sound.playNote(Sound.PIANO, 988, (int)duur); //B5
 			break;	
-		case "Brown": Sound.playNote(PIANO, 523, (int)duur); //C5
+		case "Brown": Sound.playNote(Sound.PIANO, 523, (int)duur); //C5
 			break;
-		case "Green": Sound.playNote(PIANO, 587,(int)duur); //D5
+		case "Green": Sound.playNote(Sound.PIANO, 587,(int)duur); //D5
 			break;
-		case "White": Sound.playNote(PIANO, 659, (int)duur); //E5
+		case "White": Sound.playNote(Sound.PIANO, 659, (int)duur); //E5
 			break;	
-		case "Black": Sound.playNote(PIANO, 698, (int)duur); //F5
+		case "Black": Sound.playNote(Sound.PIANO, 698, (int)duur); //F5
 			break;
-		case "Yellow": Sound.playNote(PIANO, 784, (int)duur); //G5
+		case "Yellow": Sound.playNote(Sound.PIANO, 784, (int)duur); //G5
 			break;
 		default: Lcd.print(7, "Geen input");
 			break;
