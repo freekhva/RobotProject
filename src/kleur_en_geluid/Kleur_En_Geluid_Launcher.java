@@ -8,6 +8,7 @@ import basisoefeningen.Lcd;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3ColorSensor;
+import lejos.hardware.sensor.SensorConstants;
 import lejos.robotics.Color;
 import lejos.robotics.ColorDetector;
 import lejos.robotics.ColorIdentifier;
@@ -22,7 +23,7 @@ import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.UnregulatedMotor;;
 
-public class Kleur_En_Geluid_Launcher {
+public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 	public static void main(String[] args) {
 		// Aanmaken sensor en het opstarten riedeltje
@@ -33,6 +34,7 @@ public class Kleur_En_Geluid_Launcher {
 				final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
 				ColorSensor color = new ColorSensor(SensorPort.S3);
+				TouchSensor touch = new TouchSensor((ADSensorPort) SensorPort.S2);
 
 				System.out.println("Kleur van geluid");
 				Lcd.print(2, "Druk op een toets");
@@ -78,7 +80,7 @@ public class Kleur_En_Geluid_Launcher {
 					Geluid(kleur);
 					}
 					//Delay.msDelay(1000);
-				}while (Button.ESCAPE.isUp());
+				}while (Button.ESCAPE.isUp() || touch.isPressed());
 				
 				//Stop motoren
 				motorL.stop();
