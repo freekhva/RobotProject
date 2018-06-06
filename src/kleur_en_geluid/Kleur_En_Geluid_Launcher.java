@@ -29,6 +29,8 @@ public class Kleur_En_Geluid_Launcher {
 
 				String kleur = "Grijs";
 				int arraylengte = 3;
+				final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
+				final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
 				ColorSensor color = new ColorSensor(SensorPort.S3);
 
@@ -48,9 +50,6 @@ public class Kleur_En_Geluid_Launcher {
 				color.setColorIdMode();
 				color.setFloodLight(false);
 
-				 // create two motor objects to control the motors.
-		        UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.B);
-		        UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.C);
 		        
 		        //Starten opname
 		        Lcd.clear(3);
@@ -58,8 +57,8 @@ public class Kleur_En_Geluid_Launcher {
 		        Button.waitForAnyPress();
 		        
 		        // set motors to 50% power en rijden maar.
-		        motorA.setPower(20);
-		        motorB.setPower(20);
+		        motorL.setPower(20);
+		        motorR.setPower(20);
 
 		        // wait 2 seconds.
 		        //Delay.msDelay(4000);
@@ -82,8 +81,8 @@ public class Kleur_En_Geluid_Launcher {
 				}while (Button.ESCAPE.isUp());
 				
 				//Stop motoren
-				 motorA.stop();
-			     motorB.stop();
+				motorL.stop();
+				motorR.stop();
 				
 				//afspelen van de ArrayList
 //				Lcd.clear(5);
@@ -100,8 +99,8 @@ public class Kleur_En_Geluid_Launcher {
 					
 				// free up resources.
 				color.close();
-				 motorA.close(); 
-			     motorB.close();
+				motorL.close(); 
+				motorR.close();
 				
 				Sound.beepSequence(); // we are done.
 

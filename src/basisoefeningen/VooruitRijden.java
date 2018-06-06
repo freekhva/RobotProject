@@ -21,7 +21,7 @@ package basisoefeningen;
 	        // create two motor objects to control the motors.
 	        UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
 	        UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B);
-
+	        
 	        // set motors to 50% power.
 	        motorA.setPower(50);
 	        motorB.setPower(50);
