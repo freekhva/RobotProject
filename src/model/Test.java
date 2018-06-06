@@ -1,11 +1,21 @@
 package model;
 
+import lejos.hardware.Button;
+import lejos.hardware.sensor.EV3TouchSensor;
+import lejos.hardware.sensor.SensorMode;
+import sensoren.*;
+
 public class Test 
 {
-	int blaa;
-	
-	public Test()
+	public static void main(String[] args) 
 	{
-		this.blaa = 1004;
+		TouchSensor touch = new TouchSensor();
+		
+		 // Button.waitForAnyPress();
+		while (true)
+		{
+			 if( touch.getTouchSensorAanUit() )
+				System.out.println("Button aan!!! ");
+		}
 	}
 }
