@@ -2,11 +2,12 @@ package kleur_en_geluid;
 
 import basisoefeningen.Lcd;
 import lejos.hardware.Sound;
+import lejos.hardware.Sounds;
 
 
 
 
-public class KleurNaarGeluid{
+public class KleurNaarGeluid implements Sounds{
 	//dit voegt weinig toe op dit moment, maar het bestaat
 
 	private String kleur;
