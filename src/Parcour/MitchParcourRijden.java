@@ -27,7 +27,7 @@ public class MitchParcourRijden {
 		float ambient;
 		float white;
 		float black;
-		float test;
+		float test2;
 //		float midpointLeft;
 //		float midpointRight;
 		float correction;
@@ -43,19 +43,19 @@ public class MitchParcourRijden {
 		// Calibrate
 		System.out.println("White?");
 		Button.waitForAnyPress();
-		white = ambSensor.getAmbient();
+		white = ambSensor.getRed();
 		System.out.println("White value: " +white);
 
 		
 		System.out.println("Black?");
 		Button.waitForAnyPress();
-		black = ambSensor.getAmbient();
+		black = ambSensor.getRed();
 		System.out.println("Black value: " +black);
 		
 		float midpoint;
 		midpoint = ( white - black ) / 2 + black;
-		kp = (float) 0.500; 
-		ki = (float) 0.250; 
+		kp = (float) 1.0; 
+		ki = (float) 0.0; 
 		kd = (float) 0.00;
 		lasterror = 0;
 		integral = 0;
@@ -66,9 +66,9 @@ public class MitchParcourRijden {
 		
 		while( Button.ESCAPE.isUp() ) // stop == false )
 		{ 	
-			ambient = ambSensor.getAmbient();
+			ambient = ambSensor.getRed();
 			error = midpoint - ambient;
-			integral = error + integral;
+			integral = integral + error;
 			derivative = error - lasterror;
 			
 			correction = (kp * error) + (ki * integral) + (kd * derivative); 
