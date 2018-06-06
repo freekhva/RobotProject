@@ -10,7 +10,7 @@ public class TouchSensor
 	private float[] sample = new float[ this.touch.sampleSize() ]; // Sample Meter
 	private final float touchWaarde = (float) 0.5;
 	
-	// Get Sample waarde
+	// Get Sample waarde in een float
 	public float getSampleWaarde()
 	{
 		this.touch.fetchSample(sample, 0);
