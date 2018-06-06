@@ -5,10 +5,12 @@ import lejos.hardware.Sound;
 import lejos.utility.Delay;
 import java.util.ArrayList;
 import java.util.List;
+import lejos.hardware.Sounds;
 
-public class KleurNaarGeluid {
+
+public class KleurNaarGeluid implements Sounds{
 	//dit voegt weinig toe op dit moment, maar het bestaat
-	public final static int[] PIANO = new int[]{4, 25, 500, 7000, 5};
+	//public final static int[] PIANO = new int[]{4, 25, 500, 7000, 5};
 	private String kleur;
 	private double duur;
 	
@@ -24,12 +26,12 @@ public class KleurNaarGeluid {
 	public double getDuur() {
 		return duur;
 	}
+
 	
-	
-	public void Geluid(){
+	public void arrayGeluid(){
 		duur =  this.duur*1000; 
 		switch (kleur) {
-		case "Red": Sound.playNote(PIANO, 880, (int)duur); //A5
+		case "Red": Sound.playNote(Sound.PIANO, 880, (int)duur); //A6
 			break;
 		case "Blue": Sound.playNote(PIANO, 988, (int)duur); //B5
 			break;	
