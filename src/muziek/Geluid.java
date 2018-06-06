@@ -1,4 +1,4 @@
-package Kleurherkennen;
+package muziek;
 
 import lejos.hardware.Button;
 import lejos.hardware.Sound;

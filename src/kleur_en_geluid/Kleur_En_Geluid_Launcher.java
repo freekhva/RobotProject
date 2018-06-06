@@ -1,6 +1,8 @@
 package kleur_en_geluid;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import basisoefeningen.ColorSensor;
 import basisoefeningen.Lcd;
 import lejos.hardware.port.MotorPort;
@@ -15,6 +17,9 @@ import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.Color;
 import lejos.utility.Delay;
+import muziek.*;
+import lejos.hardware.Brick;
+import lejos.hardware.BrickFinder;
 import lejos.hardware.lcd.Font;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.UnregulatedMotor;
@@ -24,9 +29,8 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 	public static void main(String[] args) {
 		// Aanmaken sensor en het opstarten riedeltje, motoren
 
-				String kleur;
+				String kleur = "Grijs";
 				Stopwatch stopwatch =  new Stopwatch();
-				ArrayList<KleurNaarGeluid> test2 = new ArrayList<>();
 				
 				
 				final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
@@ -34,9 +38,11 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 				ColorSensor color = new ColorSensor(SensorPort.S3);
 //				TouchSensor touch = new TouchSensor(SensorPort.S2);
+				
 
-				System.out.println("Kleur van geluid");
-				Lcd.print(2, "Druk op een toets");
+								
+//				System.out.println("Kleur van geluid");
+				Lcd.print(1, "Druk op een toets");
 
 				Button.LEDPattern(4); // flash green led and
 				Sound.beepSequenceUp(); // make sound when ready.
@@ -45,11 +51,15 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				Button.LEDPattern(0);
 
 				// Starten van de sensor
+
 				Delay.msDelay(1000);
 
 				color.setColorIdMode();
 				color.setFloodLight(false);
+				
+				//kleursensor een meting laten doen om hem te initialiseren
 				kleur = ColorSensor.colorName(color.getColorID());
+				Lcd.print(2,"Beginkleur =" + kleur);
 
 		        
 		        //Starten opname
@@ -62,10 +72,12 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 		        motorR.setPower(20);
 
 		        // wait 2 seconds.
-			       //Delay.msDelay(4000);
+		        //Delay.msDelay(4000);
+				
+				ArrayList<KleurNaarGeluid> test2 = new ArrayList<>();
+				// kleuren opslaan in ArrayList
 				
 				
-				// kleuren opslaan in ArrayList				
 				do {
 					if (!kleur.equals(ColorSensor.colorName(color.getColorID()))){
 					test2.add(new KleurNaarGeluid(kleur,stopwatch.toonDuur()));
@@ -76,10 +88,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 					Lcd.clear(5);
 					Lcd.print(5, "Druk op escape om te stoppen");
 					//nog een oplossing voor blijven afspelen
-					Geluid(kleur);
+					Geluid(kleur, 1);
 					}
 				}while (Button.ESCAPE.isUp());
-				
+				//|| touch.isPressed()
 				
 				//Stop motoren
 				motorL.stop();
@@ -110,21 +122,22 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 			}
 		//afspelen van de juiste noten		
-	public static void Geluid(String kleur){
+	public static void Geluid(String kleur, double duur){
+		 duur = duur*1000; 
 		switch (kleur) {
-		case "Red": Sound.playTone(880, 40); //A5
+		case "Red": Sound.playTone( 880, (int)duur); //A5
 			break;
-		case "Blue": Sound.playTone(988, 40); //B5
+		case "Blue": Sound.playTone(988, (int)duur); //B5
 			break;	
-		case "Brown": Sound.playTone(523, 40); //C5
+		case "Brown": Sound.playTone(523, (int)duur); //C5
 			break;
-		case "Green": Sound.playTone(587,40); //D5
+		case "Green": Sound.playTone(587,(int)duur); //D5
 		break;
-	case "White": Sound.playTone(659, 40); //E5
+	case "White": Sound.playTone(659, (int)duur); //E5
 		break;	
-	case "Black": Sound.playTone(698, 40); //F5
+	case "Black": Sound.playTone(698, (int)duur); //F5
 		break;
-	case "Yellow": Sound.playTone(784, 40); //G5
+	case "Yellow": Sound.playTone(784, (int)duur); //G5
 		break;
 		default: Lcd.print(7, "Geen input");
 		break;
