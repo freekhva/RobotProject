@@ -31,6 +31,14 @@ public class Kaart {
 	public int getGroen() {
 		return groen;
 	}
-	
+	//kleuren testen van de kaart met de tarotwaarden
+	public boolean testkleur(int kleur, int tarotkleur) {
+		for(int i = -2; i<3; i++ ) {
+			if( kleur+i == tarotkleur)
+				return true;
+		}
+		
+		return false;
+	}
 	
 }
