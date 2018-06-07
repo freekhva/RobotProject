@@ -8,7 +8,7 @@ public class Kaart {
 	int groen;
 	
 	//constructor
-	public Kaart(String naamKaart, int rood, int blauw, int groen) {
+	public Kaart(String naamKaart, int rood, int groen, int blauw) {
 		super();
 		this.naamKaart = naamKaart;
 		this.rood = rood;
@@ -32,13 +32,14 @@ public class Kaart {
 		return groen;
 	}
 	//kleuren testen van de kaart met de tarotwaarden
-	public boolean testkleur(int kleur, int tarotkleur) {
-		for(int i = -2; i<3; i++ ) {
-			if( kleur+i == tarotkleur)
-				return true;
-		}
+	public boolean testKleur(int kleur, int tarotkleur) {
 		
+			if( (kleur<= (tarotkleur+1) && kleur>=(tarotkleur-1))) {
+				return true;	
+			} else {
+				
 		return false;
-	}
+			}
+			}
 	
 }
