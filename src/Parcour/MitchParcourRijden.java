@@ -11,8 +11,8 @@ public class MitchParcourRijden {
 	public static void main(String[] args) 
 	{
 		// Constants
-		final int FULL_POWER = 50;
-		final int NO_POWER = 25;	
+		final int FULL_POWER = 70;
+		final int NO_POWER = -20;	
 		// linker en rechter motor definieren
 		final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
 		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
@@ -54,9 +54,9 @@ public class MitchParcourRijden {
 		
 		float midpoint;
 		midpoint = ( white - black ) / 2 + black;
-		kp = (float) 1.0; 
-		ki = (float) 0.0; 
-		kd = (float) 0.00;
+		kp = (float) 1; 
+		ki = (float) 0; 
+		kd = (float) 0;
 		lasterror = 0;
 		integral = 0;
 		
@@ -67,11 +67,13 @@ public class MitchParcourRijden {
 		while( Button.ESCAPE.isUp() ) // stop == false )
 		{ 	
 			ambient = ambSensor.getRed();
+			System.out.println("This is current ambient:" +ambient);
 			error = midpoint - ambient;
 			integral = integral + error;
 			derivative = error - lasterror;
 			
-			correction = (kp * error) + (ki * integral) + (kd * derivative); 
+			correction = (kp * error) + (ki * integral) + (kd * derivative);
+			System.out.println("This is current correction:" +correction);
 			
 //			midpointLeft = (white - black ) / 4 ;
 //			midpointRight = ((white - black ) / 4)*3; 
@@ -88,8 +90,8 @@ public class MitchParcourRijden {
 			}
 			else if( ambient > midpoint )
 			{
-				motorL.setPower( NO_POWER + (int) correction);
-				motorR.setPower( FULL_POWER - (int) correction);
+				motorL.setPower( NO_POWER - (int) correction);
+				motorR.setPower( FULL_POWER + (int) correction);
 			}
 			else 
 			{
