@@ -55,8 +55,8 @@ public class MitchParcourRijden {
 		float midpoint;
 		midpoint = ( white - black ) / 2 + black;
 		kp = (float) 0.5; 
-		ki = (float) 0.25; 
-		kd = (float) 0.083;
+		ki = (float) 0.2; 
+		kd = (float) 0;
 		lasterror = 0;
 		integral = 0;
 		
@@ -67,17 +67,17 @@ public class MitchParcourRijden {
 		while( Button.ESCAPE.isUp() ) // stop == false )
 		{ 	
 			ambient = ambSensor.getRed();
-			System.out.println("This is current ambient:" +ambient);
-			System.out.println("This is current ambient:" +ambient);
-			System.out.println("This is current ambient:" +ambient);
+	//		System.out.println("This is current ambient:" +ambient);
+	//		System.out.println("This is current ambient:" +ambient);
+	//		System.out.println("This is current ambient:" +ambient);
 			error = midpoint - ambient;
 			integral = integral + error;
 			derivative = error - lasterror;
 			
 			correction = (kp * error) + (ki * integral) + (kd * derivative);
-			System.out.println("This is current correction:" +correction);
-			System.out.println("This is current correction:" +correction);
-			System.out.println("This is current correction:" +correction);
+	//		System.out.println("This is current correction:" +correction);
+	//		System.out.println("This is current correction:" +correction);
+	//		System.out.println("This is current correction:" +correction);
 //			midpointLeft = (white - black ) / 4 ;
 //			midpointRight = ((white - black ) / 4)*3; 
 			

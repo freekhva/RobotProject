@@ -11,8 +11,8 @@ public class ParcourRijden {
 	public static void main(String[] args) 
 	{
 		// Constants
-		final int FULL_POWER = 70;
-		final int NO_POWER = -10;		
+		final int FULL_POWER = 60;
+		final int NO_POWER = 10;		
 		
 		// Sensors
 		ColorSensor ambSensor = new ColorSensor(SensorPort.S3);
