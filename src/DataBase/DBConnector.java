@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import mystic_T.Kaart;
 
@@ -113,9 +114,10 @@ public class DBConnector
 
 	}
 	
-	// Select alle uit de db
-	public ResultSet selectUitDB()
+	// Select alle uit de db en stop ze in een arrayList....
+	public ArrayList<Kaart> selecAlleKaartentUitDB()
 	{
+		ArrayList<Kaart> kaarten = new ArrayList<>();
 		ResultSet rs = null;
 		String strSql = "SELECT * FROM kaart";
     	try 
@@ -123,13 +125,24 @@ public class DBConnector
 			this.prepstmt = this.conn.prepareStatement( strSql );
 			rs = this.prepstmt.executeQuery();
 			
+			// Vul arrayList
+			while( rs.next() )
+			{
+				
+				kaarten.add( new Kaart(rs.getString("naamkaart"), 
+						rs.getInt("rood"),
+						rs.getInt("groen"),
+						rs.getInt("blauw")
+						) );
+			}
+			
 		} 
     	catch (SQLException e) 
     	{
 			e.printStackTrace();
 		}
     	
-    	return rs;
+    	return kaarten;
 	}
 	
 	// Select alle uit de db
@@ -165,6 +178,13 @@ public class DBConnector
 
 		return kaart;
 	}
-	
-	
 }
+
+///// OLD STUFF
+//System.out.println( "Rood : " + rs.getInt("rood") );
+//System.out.println( "groen : " + rs.getInt("groen") );
+//System.out.println( "blauw : " + rs.getInt("blauw") );
+//System.out.println( "NaamKaart: " +  getString("naamkaart"));
+//System.out.println( "Omschrjving : " + rs.getString("omschrijving") );
+//System.out.println( "Betekenis : " + rs.getString("betekenis") );
+//System.out.println( "Waarde : " + rs.getInt("waarde") );
