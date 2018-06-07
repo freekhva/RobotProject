@@ -14,64 +14,106 @@ import java.util.List;
 public class Mystic_T_Launcher {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		ColorSensor color = new ColorSensor(SensorPort.S3);
+		ColorSensor color = new ColorSensor(SensorPort.S4);
+		//aanmaken variabelen en arraylists
 		int rood;
 		int blauw;
 		int groen;
+		final int INPUT = 3;
+		
 		ArrayList<Kaart> kaarten = new ArrayList<>();
-		
-        System.out.println("Mystic T");
-        Lcd.print(2, "Druk een knop");
-        
-        Button.LEDPattern(4);    // flash green led and
-        Sound.beepSequenceUp();    // make sound when ready.
+		ArrayList<Kaart> tarotkaarten = new ArrayList<Kaart>();
+		tarotkaarten.add(new Kaart("Rood", 57, 5, 4));
+		tarotkaarten.add(new Kaart("Groen", 11, 35, 8));
+		tarotkaarten.add(new Kaart("Blauw", 8, 38, 38));
+		tarotkaarten.add(new Kaart("Moordenaar", 31, 22, 15));
+		tarotkaarten.add(new Kaart("Predikant", 25, 20, 12));
+		tarotkaarten.add(new Kaart("Koopman", 20, 16, 9));
 
-        Button.waitForAnyPress();
-        Button.LEDPattern(0);
-        
-        // run until escape button pressed.
-		
-        color.setRGBMode();
-        color.setFloodLight(Color.WHITE);
-        
-        Color rgb;
-        
-        do
-       {
-            rgb = color.getColor();
-            Lcd.clear(3);
-            Lcd.print(3, "r=%d g=%d b=%d", rgb.getRed(), rgb.getGreen(), rgb.getBlue());
-            Lcd.print(4, "Scan een kaart");
-            Button.waitForAnyPress();
-            rood = rgb.getRed();
-            groen = rgb.getGreen();
-            blauw = rgb.getBlue();
-            kaarten.add (new Kaart(rood, blauw, groen));
-            Delay.msDelay(250);
-       } while (kaarten.size()<3);
-            //}while (Button.ESCAPE.isUp());
+		System.out.println("Mystic T");
+		Lcd.print(2, "Druk een knop");
 
-        //Weet niet of deze nodig is
-        Delay.msDelay(1000);
-		
-        for(int i = 0; i<kaarten.size(); i++) {
-        	if (kaarten.get(i).getRood() == kaarten.get(i+1).getRood()){
-        		Sound.beepSequence();
-        	}
-        	//kaarten.get(i).getBlauw();
-        	//kaarten.get(i).getGroen();
-        }
-        
-        //Einde
-        color.close();
-        
-        Sound.beepSequence();    // we are done.
+		Button.LEDPattern(4); // flash green led and
+		Sound.beepSequenceUp(); // make sound when ready.
 
-        Button.LEDPattern(4);
-        Button.waitForAnyPress();
-        
+		Button.waitForAnyPress();
+		Button.LEDPattern(0);
+
+		// Instellen juiste sensot
+
+		color.setRGBMode();
+		color.setFloodLight(Color.WHITE);
+
+		Color rgb;
+
+		Lcd.clear(3);
+		Lcd.print(3, "Scan een kaart");
+		Button.waitForAnyPress();
+
+		do {
+			rgb = color.getColor();
+
+			Lcd.clear(5);
+			Lcd.clear(6);
+			Lcd.print(4, "r=%d g=%d b=%d", rgb.getRed(), rgb.getGreen(), rgb.getBlue());
+			rood = rgb.getRed();
+			groen = rgb.getGreen();
+			blauw = rgb.getBlue();
+
+			// checken of de kaart in de tarotarray voorkomt
+			for (Kaart kaart : tarotkaarten) {
+				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())) {
+					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
+					Sound.beep();
+					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
+					if (kaarten.size() < INPUT) {
+						Lcd.print(6, "Scan volgende kaart");
+						Button.waitForAnyPress();
+					}
+				} else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(rood, kaart.getRood())) {
+					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
+					Sound.beep();
+					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
+					if (kaarten.size() < INPUT) {
+						Lcd.print(6, "Scan volgende kaart");
+						Button.waitForAnyPress();
+					}
+				} else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(blauw, kaart.getBlauw())) {
+					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
+					Sound.beep();
+					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
+					if (kaarten.size() < INPUT) {
+						Lcd.print(6, "Scan volgende kaart");
+						Button.waitForAnyPress();
+					}
+				}
+			}
+		} while (kaarten.size() <INPUT);
+
+		// kaarten scannen is klaar
+		Lcd.print(6, "Alle kaarten zijn gescand");
+		Button.waitForAnyPress();
+		Lcd.clear(6);
+
+		for (int i = 0; i < kaarten.size(); i++) {
+			Lcd.clear(i + 3);
+			Lcd.print(i + 3, kaarten.get(i).getNaamKaart());
+
+		}
+
+		// Weet niet of deze nodig is
+		Delay.msDelay(1000);
+
+
+		// Einde
+		color.close();
+
+		Sound.beepSequence(); // we are done.
+
+		Button.LEDPattern(4);
+		Button.waitForAnyPress();
+
 	}
 
 }
