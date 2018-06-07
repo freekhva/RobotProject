@@ -16,15 +16,18 @@ public class Mystic_T_Launcher {
 	public static void main(String[] args) {
 
 		ColorSensor color = new ColorSensor(SensorPort.S4);
+		//aanmaken variabelen en arraylists
 		int rood;
 		int blauw;
 		int groen;
+		final int INPUT = 3;
+		
 		ArrayList<Kaart> kaarten = new ArrayList<>();
 		ArrayList<Kaart> tarotkaarten = new ArrayList<Kaart>();
 		tarotkaarten.add(new Kaart("Rood", 57, 5, 4));
 		tarotkaarten.add(new Kaart("Groen", 11, 35, 8));
 		tarotkaarten.add(new Kaart("Blauw", 8, 38, 38));
-		tarotkaarten.add(new Kaart("Moordenaar", 31, 22, 11));
+		tarotkaarten.add(new Kaart("Moordenaar", 31, 22, 15));
 		tarotkaarten.add(new Kaart("Predikant", 25, 20, 12));
 		tarotkaarten.add(new Kaart("Koopman", 20, 16, 9));
 
@@ -37,7 +40,7 @@ public class Mystic_T_Launcher {
 		Button.waitForAnyPress();
 		Button.LEDPattern(0);
 
-		// run until escape button pressed.
+		// Instellen juiste sensot
 
 		color.setRGBMode();
 		color.setFloodLight(Color.WHITE);
@@ -60,12 +63,11 @@ public class Mystic_T_Launcher {
 
 			// checken of de kaart in de tarotarray voorkomt
 			for (Kaart kaart : tarotkaarten) {
-				// if (rood == kaart.getRood()&& blauw == kaart.getBlauw())
 				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())) {
 					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					Sound.beep();
 					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
-					if (kaarten.size() < 3) {
+					if (kaarten.size() < INPUT) {
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
 					}
@@ -73,7 +75,7 @@ public class Mystic_T_Launcher {
 					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					Sound.beep();
 					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
-					if (kaarten.size() < 3) {
+					if (kaarten.size() < INPUT) {
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
 					}
@@ -81,13 +83,13 @@ public class Mystic_T_Launcher {
 					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					Sound.beep();
 					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
-					if (kaarten.size() < 3) {
+					if (kaarten.size() < INPUT) {
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
 					}
 				}
 			}
-		} while (kaarten.size() < 3);
+		} while (kaarten.size() <INPUT);
 
 		// kaarten scannen is klaar
 		Lcd.print(6, "Alle kaarten zijn gescand");
@@ -103,14 +105,6 @@ public class Mystic_T_Launcher {
 		// Weet niet of deze nodig is
 		Delay.msDelay(1000);
 
-		// Deze forloop checkt de kleuren van de 3 kaarten met de al bestaande lijst)
-		// for(int i = 0; i<kaarten.size(); i++) {
-		// if (kaarten.get(i).getRood() == kaarten.get(i+1).getRood()){
-		// Sound.beepSequence();
-		// }
-		// kaarten.get(i).getBlauw();
-		// kaarten.get(i).getGroen();
-		// }
 
 		// Einde
 		color.close();
