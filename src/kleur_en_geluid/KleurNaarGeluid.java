@@ -28,6 +28,7 @@ public class KleurNaarGeluid implements Sounds{
 
 	
 	public void arrayGeluid(){
+		this.duur = duur*500;
 		switch (kleur) {
 		case "Red": Sound.playNote(Sound.PIANO, 880, (int)duur); //A6
 			break;
