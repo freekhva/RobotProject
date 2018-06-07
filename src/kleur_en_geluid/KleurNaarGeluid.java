@@ -28,11 +28,10 @@ public class KleurNaarGeluid implements Sounds{
 
 	
 	public void arrayGeluid(){
-		duur =  this.duur*1000; 
 		switch (kleur) {
 		case "Red": Sound.playNote(Sound.PIANO, 880, (int)duur); //A6
 			break;
-		case "Blue": Sound.playNote(Sound.PIANO, 988, (int)duur); //B5
+		case "Yellow": Sound.playNote(Sound.PIANO, 988, (int)duur); //B5
 			break;	
 		case "Brown": Sound.playNote(Sound.PIANO, 523, (int)duur); //C5
 			break;
@@ -42,7 +41,7 @@ public class KleurNaarGeluid implements Sounds{
 			break;	
 		case "Black": Sound.playNote(Sound.PIANO, 698, (int)duur); //F5
 			break;
-		case "Yellow": Sound.playNote(Sound.PIANO, 784, (int)duur); //G5
+		case "Blue": Sound.playNote(Sound.PIANO, 784, (int)duur); //G5
 			break;
 		default: Lcd.print(7, "Geen input");
 			break;

@@ -45,7 +45,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
 				ColorSensor color = new ColorSensor(SensorPort.S3);
-
+				ArrayList<KleurNaarGeluid> kleurtoon = new ArrayList<>();
 				
 
 								
@@ -82,13 +82,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 		        // wait 2 seconds.
 		        //Delay.msDelay(4000);
 				
-				ArrayList<KleurNaarGeluid> test2 = new ArrayList<>();
-				// kleuren opslaan in ArrayList
-				
-				
+				// kleuren opslaan in ArrayList				
 				do {
 					if (!kleur.equals(ColorSensor.colorName(color.getColorID()))){
-					test2.add(new KleurNaarGeluid(kleur,stopwatch.toonDuur()));
+					kleurtoon.add(new KleurNaarGeluid(kleur,stopwatch.toonDuur()));
 					Lcd.clear(4);
 					kleur = ColorSensor.colorName(color.getColorID());
 					stopwatch.setStartTijd(System.currentTimeMillis());
@@ -99,9 +96,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 					Geluid(kleur, 1);
 					}
 				}while (!touch.getTouchSensorAanUit() && Button.ESCAPE.isUp()); //  || !touch.getTouchSensorAanUit() Button.ESCAPE.isUp())
-				//|| touch.isPressed()
 				
-
 				
 				//Stop motoren
 				motorL.stop();
@@ -112,10 +107,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				Lcd.print(5, "druk voor afspelen.");
 				Button.waitForAnyPress();
 				
-				for(int i = 1; i<test2.size(); i++) {
-				test2.get(i).arrayGeluid();
+				for(int i = 1; i<kleurtoon.size(); i++) {
+				kleurtoon.get(i).arrayGeluid();
 				Lcd.clear(3);
-				Lcd.print(3, " %d isKleur=%s", i, test2.get(i).getKleur());
+				Lcd.print(3, " %d isKleur=%s", i, kleurtoon.get(i).getKleur());
 					Delay.msDelay(1000);
 				}
 					
@@ -132,25 +127,24 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 
 			}
 		//afspelen van de juiste noten		
-	public static void Geluid(String kleur, double duur){
-		 duur = duur*1000; 
+	public static void Geluid(String kleur, double duur){ 
 		switch (kleur) {
 		case "Red": Sound.playTone( 880, (int)duur); //A5
 			break;
-		case "Blue": Sound.playTone(988, (int)duur); //B5
+		case "Yellow": Sound.playTone(988, (int)duur); //B5
 			break;	
 		case "Brown": Sound.playTone(523, (int)duur); //C5
 			break;
 		case "Green": Sound.playTone(587,(int)duur); //D5
-		break;
-	case "White": Sound.playTone(659, (int)duur); //E5
-		break;	
-	case "Black": Sound.playTone(698, (int)duur); //F5
-		break;
-	case "Yellow": Sound.playTone(784, (int)duur); //G5
-		break;
+			break;
+		case "White": Sound.playTone(659, (int)duur); //E5
+			break;	
+		case "Black": Sound.playTone(698, (int)duur); //F5
+			break;
+		case "Blue": Sound.playTone(784, (int)duur); //G5
+			break;
 		default: Lcd.print(7, "Geen input");
-		break;
+			break;
 		}
 	}
 		}
