@@ -63,7 +63,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				Delay.msDelay(1000);
 
 				color.setColorIdMode();
-				color.setFloodLight(false);
+				color.setFloodLight(Color.WHITE);
 				
 				//kleursensor een meting laten doen om hem te initialiseren
 				kleur = ColorSensor.colorName(color.getColorID());
