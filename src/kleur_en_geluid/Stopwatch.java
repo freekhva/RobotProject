@@ -25,6 +25,6 @@ public class Stopwatch {
 	// duur bepalen
 	public double toonDuur() {
 		long now = System.currentTimeMillis();
-        return (now - startTijd) / 1000.0;
+        return (now - startTijd);
 	}
 }
