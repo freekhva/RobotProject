@@ -1,4 +1,4 @@
-package mystic_T;
+package mystic_T; // hier zit een rare error
 
 import sensoren.*;
 import basisoefeningen.ColorSensor;
@@ -10,6 +10,7 @@ import lejos.robotics.Color;
 import lejos.utility.Delay;
 import java.util.ArrayList;
 import java.util.List;
+import mystic_T.*; // freek toegevoegd, omdat anders Kaart niet meer herkend werd
 
 public class Mystic_T_Launcher {
 
