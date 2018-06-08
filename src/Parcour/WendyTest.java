@@ -12,21 +12,25 @@ public class WendyTest {
 	public static void main(String[] args) 
 	{
 		// Constants
-		final int FULL_POWER = 40;
-		final int NO_POWER = 40;
+		final int FULL_POWER = 30;
+		final int NO_POWER = 30;
 		// linker en rechter motor definieren
 		final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
 		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 		
 		// Sensors
 		ColorSensor ambSensor = new ColorSensor(SensorPort.S3);
+		ColorSensor ambSensorWhite = new ColorSensor(SensorPort.S1);
 		// ambSensor.setAmbientMode();
 		
 		ambSensor.setRedMode();
+		ambSensorWhite.setRedMode();
 		
 		// Init vars
 		float ambient;
+		float ambient2;
 		float white;
+		float whiteArea;
 		float black;
 		float correction;
 		float kp;
@@ -42,6 +46,7 @@ public class WendyTest {
 		System.out.println("White?");
 		Button.waitForAnyPress();
 		white = ambSensor.getRed();
+		whiteArea = ambSensorWhite.getRed();
 		System.out.println("White value: " +white);
 
 		System.out.println("Black?");
@@ -57,9 +62,6 @@ public class WendyTest {
 		lasterror = 0;
 		integral = 0;
 		
-		// proberen: 0.7 + 0.4 + 0.15 PESSEN INTEGRAL
-		// proberen 0.33 + 0.5 + 0.33 SOME OVERSHOOT
-		// proberen 0.2 + 0.5 + 0.33 NO OVERSHOOT
 		
 		System.out.println("Go do it! START: ");
 		// Button.waitForAnyPress();
@@ -67,19 +69,26 @@ public class WendyTest {
 		while( Button.ESCAPE.isUp() ) // stop == false )
 		{ 	
 			ambient = ambSensor.getRed();
+			ambient2 = ambSensorWhite.getRed();
 			error = midpoint - ambient;
 			integral = integral + error;
 			derivative = error - lasterror;
 			correction = kp * error + ki * integral + kd * derivative;
-
 			correction = correction * 100;
-			if ( ambient >= white) {
+			
+			if ( ambient >= (white) && ambient2 >= whiteArea) {
 //		        Delay.msDelay(250);
-				motorL.setPower(20);
-		        motorR.setPower(20);
-		        Delay.msDelay(200);
-			}
-		    if ( ambient < midpoint ) 
+				motorL.setPower(30);
+		        motorR.setPower(30);
+		        Delay.msDelay(1000);
+		        if (ambient2 >= (black * 0.7))
+		        {
+		            motorL.setPower(20);
+		            motorR.setPower(10);
+//		            Delay.msDelay(300);
+		        }
+		    }
+			else if ( ambient < midpoint ) 
 			{
 				motorL.setPower( (FULL_POWER + (int) correction));
 				motorR.setPower( (NO_POWER - (int) correction));
@@ -99,7 +108,6 @@ public class WendyTest {
 		
 		
 		}
-	
 
 }
 
