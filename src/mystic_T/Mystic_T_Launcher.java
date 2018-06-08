@@ -114,11 +114,13 @@ public class Mystic_T_Launcher {
 		Button.waitForAnyPress();
 		Lcd.clear(6);
 
+		//printen gescande kaartem
 		for (int i = 0; i < kaarten.size(); i++) {
 			Lcd.clear(i + 3);
 			Lcd.print(i + 3, kaarten.get(i).getNaamKaart());
 
 		}
+		//uitspuge voorspelling
 		Lcd.clear(6);
 		Lcd.print(6, voorspelling(kaarten));
 		Button.waitForAnyPress();

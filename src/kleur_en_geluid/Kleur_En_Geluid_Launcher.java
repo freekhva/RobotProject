@@ -111,10 +111,9 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants{
 				for(int i = 1; i<kleurtoon.size(); i++) {
 				kleurtoon.get(i).arrayGeluid();
 				Lcd.clear(3);
-				Lcd.print(3, " %d isKleur=%s", i, kleurtoon.get(i).getKleur());
+				Lcd.print(3, "%d is %s", i, kleurtoon.get(i).getKleur());
 			
 				}
-					
 					
 				// free up resources.
 				color.close();
