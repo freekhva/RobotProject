@@ -45,7 +45,7 @@ public class ParcourRijden {
 		{
 			ambient = ambSensor.getAmbient();
 			midpoint = ( white - black ) / 2 + black;
-
+			
 			if ( ambient < midpoint ) 
 			{
 				motorL.setPower( FULL_POWER );
