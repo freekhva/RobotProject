@@ -27,5 +27,5 @@ public class Noten
 		final static int DIS5 = 622;
 		final static int D5 = 587;
 		final static int CIS5 = 554;
-		final static int C5 = 523;
+		final static int C5 = 523;		
 }
