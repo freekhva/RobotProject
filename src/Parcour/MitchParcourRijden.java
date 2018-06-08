@@ -11,8 +11,8 @@ public class MitchParcourRijden {
 	public static void main(String[] args) 
 	{
 		// Constants
-		final int FULL_POWER = 70;
-		final int NO_POWER = -20;	
+		final int POWER = 50;
+		final int NO_POWER = 50;	
 		// linker en rechter motor definieren
 		final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
 		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
@@ -38,6 +38,7 @@ public class MitchParcourRijden {
 		float lasterror;
 		float integral;
 		float derivative;
+		int offset;
 		
 	
 		// Calibrate
@@ -54,12 +55,16 @@ public class MitchParcourRijden {
 		
 		float midpoint;
 		midpoint = ( white - black ) / 2 + black;
+		kp = (float) 2; 
+		ki = (float) 0.5; 
+		kd = (float) 1;
+		offset = 45;
 		kp = (float) 0.5; 
 		ki = (float) 0.2; 
 		kd = (float) 0;
 		lasterror = 0;
 		integral = 0;
-		
+		derivative = 0;
 		
 		System.out.println("Go do it! START: ");
 		// Button.waitForAnyPress();
@@ -67,6 +72,10 @@ public class MitchParcourRijden {
 		while( Button.ESCAPE.isUp() ) // stop == false )
 		{ 	
 			ambient = ambSensor.getRed();
+//			System.out.println("This is current ambient:" +ambient);
+//			System.out.println("This is current ambient:" +ambient);
+//			System.out.println("This is current ambient:" +ambient);
+			error = ambient - midpoint;
 	//		System.out.println("This is current ambient:" +ambient);
 	//		System.out.println("This is current ambient:" +ambient);
 	//		System.out.println("This is current ambient:" +ambient);
@@ -75,6 +84,10 @@ public class MitchParcourRijden {
 			derivative = error - lasterror;
 			
 			correction = (kp * error) + (ki * integral) + (kd * derivative);
+			
+//			System.out.println("This is current correction:" +correction);
+//			System.out.println("This is current correction:" +correction);
+//			System.out.println("This is current correction:" +correction);
 	//		System.out.println("This is current correction:" +correction);
 	//		System.out.println("This is current correction:" +correction);
 	//		System.out.println("This is current correction:" +correction);
@@ -85,22 +98,41 @@ public class MitchParcourRijden {
 //				motorL.setPower( FULL_POWER );
 //				motorR.setPower( FULL_POWER );
 //			}
-		
-			if ( ambient < midpoint ) 
-			{
-				motorL.setPower( FULL_POWER + (int) correction );
-				motorR.setPower( NO_POWER - (int) correction);
+			correction = (correction * 100);
+			
+			double fpc = (POWER + correction);
+			double npc = (POWER - correction);
+			
+			if (npc < 0 ) {
+				npc = 0;
 			}
-			else if( ambient > midpoint )
-			{
-				motorL.setPower( NO_POWER - (int) correction);
-				motorR.setPower( FULL_POWER + (int) correction);
-			}
-			else 
-			{
-				motorL.setPower( FULL_POWER );
-				motorR.setPower( FULL_POWER );
-			}
+			
+			if (ambient < (midpoint - 0.3)) {
+				motorL.setPower( (int) fpc);
+				motorR.setPower( (int) npc);
+			} else if (ambient > (midpoint + 0.3)) {
+				motorL.setPower( (int) npc);
+				motorR.setPower( (int) fpc);
+			} else if (ambient < (midpoint + 0.3) && ambient > (midpoint - 0.3))
+			motorL.setPower( (int) fpc);
+			motorR.setPower( (int) npc);
+			
+//			if ( ambient < midpoint) 
+//			{	
+//				motorL.setPower( (int) fpc);
+//				motorR.setPower( (int) npc);
+//			}
+//			else if( ambient > midpoint)
+//			{
+//				motorL.setPower( (int) npc);
+//				motorR.setPower( (int) fpc);
+//			}
+//			else 
+//			{
+//				motorL.setPower( FULL_POWER );
+//				motorR.setPower( FULL_POWER );
+//			}
+			
 			lasterror = error;
 		}
 
