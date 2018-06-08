@@ -23,7 +23,7 @@ public class Mystic_T_Launcher {
 		int groen;
 		final int INPUT = 3;
 		
-		ArrayList<Kaart> kaarten = new ArrayList<>();
+		ArrayList<GekozenKaart> kaarten = new ArrayList<>();
 		ArrayList<Kaart> tarotkaarten = new ArrayList<Kaart>();
 		tarotkaarten.add(new Kaart("Rood", 57, 5, 4));
 		tarotkaarten.add(new Kaart("Groen", 11, 35, 8));
@@ -71,17 +71,19 @@ public class Mystic_T_Launcher {
 			// checken of de kaart in de tarotarray voorkomt
 			for (Kaart kaart : tarotkaarten) {
 				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())&& kaart.testKleur(groen, kaart.getGroen())) {
+					Lcd.clear(5);
 					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					Sound.beep();
-					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
+					kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
 					if (kaarten.size() < INPUT) {
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
 					}
 				} else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(rood, kaart.getRood())) {
+					Lcd.clear(5);
 					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					Sound.beep();
-					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
+					kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
 					if (kaarten.size() < INPUT) {
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
@@ -100,7 +102,11 @@ public class Mystic_T_Launcher {
 			Lcd.print(i + 3, kaarten.get(i).getNaamKaart());
 
 		}
-
+		Lcd.clear(3);
+		Lcd.print(3, voorspelling(kaarten));
+		Button.waitForAnyPress();
+		
+		
 		// Weet niet of deze nodig is
 		Delay.msDelay(1000);
 
@@ -114,5 +120,13 @@ public class Mystic_T_Launcher {
 		Button.waitForAnyPress();
 
 	}
-
+	public static String voorspelling(ArrayList<GekozenKaart> kaarten) {
+		int werk =  kaarten.get(0).getToekomstwaarde()*100;
+		int liefde =  kaarten.get(1).getToekomstwaarde()*10;
+		int gezondheid = kaarten.get(2).getToekomstwaarde();
+		int voorspelling  = werk+liefde+gezondheid;
+		Voorspelling eindvoorspelling = new Voorspelling(voorspelling);
+		
+		return eindvoorspelling.maakVoorspelling();
+	}
 }
