@@ -16,13 +16,13 @@ public class Mystic_T_Launcher {
 
 	public static void main(String[] args) {
 
-		ColorSensor color = new ColorSensor(SensorPort.S4);
-		//aanmaken variabelen en arraylists
+		ColorSensor color = new ColorSensor(SensorPort.S1);
+		// aanmaken variabelen en arraylists
 		int rood;
 		int blauw;
 		int groen;
 		final int INPUT = 3;
-		
+
 		ArrayList<GekozenKaart> kaarten = new ArrayList<>();
 		ArrayList<Kaart> tarotkaarten = new ArrayList<Kaart>();
 		tarotkaarten.add(new Kaart("Rood", 57, 5, 4));
@@ -36,7 +36,6 @@ public class Mystic_T_Launcher {
 		tarotkaarten.add(new Kaart("Magier", 27, 29, 18));
 		tarotkaarten.add(new Kaart("Condotierre", 16, 16, 10));
 		tarotkaarten.add(new Kaart("Dief", 20, 17, 9));
-		
 
 		System.out.println("Mystic T");
 		Lcd.print(2, "Druk een knop");
@@ -70,27 +69,44 @@ public class Mystic_T_Launcher {
 
 			// checken of de kaart in de tarotarray voorkomt
 			for (Kaart kaart : tarotkaarten) {
-				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())&& kaart.testKleur(groen, kaart.getGroen())) {
-					Lcd.clear(5);
-					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
-					Sound.beep();
-					kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
-					if (kaarten.size() < INPUT) {
+				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())
+						&& kaart.testKleur(groen, kaart.getGroen())) {
+					if (kaarten.size() > 0) {
+						if (checkDubbel(kaart, kaarten)) {
+							Lcd.print(5, "%s is dubbel", kaart.getNaamKaart());
+							Button.waitForAnyPress();
+						} else {
+							Lcd.clear(5);
+							Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
+							Sound.beep();
+							kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
+							if (kaarten.size() < INPUT) {
+								Lcd.print(6, "Scan volgende kaart");
+								Button.waitForAnyPress();
+							}
+						}
+					} else {
+						Lcd.clear(5);
+						Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
+						Sound.beep();
+						kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
 					}
-				} else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(rood, kaart.getRood())) {
-					Lcd.clear(5);
-					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
-					Sound.beep();
-					kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
-					if (kaarten.size() < INPUT) {
-						Lcd.print(6, "Scan volgende kaart");
-						Button.waitForAnyPress();
-					}
+					// Dit is niet meer nodig, maar laat maar even staan.
+					// } else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(rood,
+					// kaart.getRood())) {
+					// Lcd.clear(5);
+					// Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
+					// Sound.beep();
+					// kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
+					// if (kaarten.size() < INPUT) {
+					// Lcd.print(6, "Scan volgende kaart");
+					// Button.waitForAnyPress();
+					// }
 				}
 			}
-		} while (kaarten.size() <INPUT);
+		} while (kaarten.size() < INPUT);
 
 		// kaarten scannen is klaar
 		Lcd.print(6, "Alle kaarten zijn gescand");
@@ -102,14 +118,12 @@ public class Mystic_T_Launcher {
 			Lcd.print(i + 3, kaarten.get(i).getNaamKaart());
 
 		}
-		Lcd.clear(3);
-		Lcd.print(3, voorspelling(kaarten));
+		Lcd.clear(6);
+		Lcd.print(6, voorspelling(kaarten));
 		Button.waitForAnyPress();
-		
-		
+
 		// Weet niet of deze nodig is
 		Delay.msDelay(1000);
-
 
 		// Einde
 		color.close();
@@ -120,13 +134,23 @@ public class Mystic_T_Launcher {
 		Button.waitForAnyPress();
 
 	}
+
+	public static boolean checkDubbel(Kaart kaart, ArrayList<GekozenKaart> kaarten) {
+		for (int i = 0; i < kaarten.size(); i++) {
+			if (kaart.getNaamKaart() == kaarten.get(i).getNaamKaart()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static String voorspelling(ArrayList<GekozenKaart> kaarten) {
-		int werk =  kaarten.get(0).getToekomstwaarde()*100;
-		int liefde =  kaarten.get(1).getToekomstwaarde()*10;
+		int werk = kaarten.get(0).getToekomstwaarde() * 100;
+		int liefde = kaarten.get(1).getToekomstwaarde() * 10;
 		int gezondheid = kaarten.get(2).getToekomstwaarde();
-		int voorspelling  = werk+liefde+gezondheid;
+		int voorspelling = werk + liefde + gezondheid;
 		Voorspelling eindvoorspelling = new Voorspelling(voorspelling);
-		
+
 		return eindvoorspelling.maakVoorspelling();
 	}
 }
