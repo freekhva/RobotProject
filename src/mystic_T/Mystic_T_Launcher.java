@@ -74,6 +74,7 @@ public class Mystic_T_Launcher {
 					if (kaarten.size() > 0) {
 						if (checkDubbel(kaart, kaarten)) {
 							Lcd.print(5, "%s is dubbel", kaart.getNaamKaart());
+							Lcd.print(6, "Scan volgende kaart");
 							Button.waitForAnyPress();
 						} else {
 							Lcd.clear(5);
