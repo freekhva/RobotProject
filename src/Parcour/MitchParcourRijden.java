@@ -59,6 +59,9 @@ public class MitchParcourRijden {
 		ki = (float) 0.5; 
 		kd = (float) 1;
 		offset = 45;
+		kp = (float) 0.5; 
+		ki = (float) 0.2; 
+		kd = (float) 0;
 		lasterror = 0;
 		integral = 0;
 		derivative = 0;
@@ -73,6 +76,10 @@ public class MitchParcourRijden {
 //			System.out.println("This is current ambient:" +ambient);
 //			System.out.println("This is current ambient:" +ambient);
 			error = ambient - midpoint;
+	//		System.out.println("This is current ambient:" +ambient);
+	//		System.out.println("This is current ambient:" +ambient);
+	//		System.out.println("This is current ambient:" +ambient);
+			error = midpoint - ambient;
 			integral = integral + error;
 			derivative = error - lasterror;
 			
@@ -81,6 +88,9 @@ public class MitchParcourRijden {
 //			System.out.println("This is current correction:" +correction);
 //			System.out.println("This is current correction:" +correction);
 //			System.out.println("This is current correction:" +correction);
+	//		System.out.println("This is current correction:" +correction);
+	//		System.out.println("This is current correction:" +correction);
+	//		System.out.println("This is current correction:" +correction);
 //			midpointLeft = (white - black ) / 4 ;
 //			midpointRight = ((white - black ) / 4)*3; 
 			
