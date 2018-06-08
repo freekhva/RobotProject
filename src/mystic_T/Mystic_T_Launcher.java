@@ -28,9 +28,15 @@ public class Mystic_T_Launcher {
 		tarotkaarten.add(new Kaart("Rood", 57, 5, 4));
 		tarotkaarten.add(new Kaart("Groen", 11, 35, 8));
 		tarotkaarten.add(new Kaart("Blauw", 8, 38, 38));
-		tarotkaarten.add(new Kaart("Moordenaar", 31, 22, 15));
-		tarotkaarten.add(new Kaart("Predikant", 25, 20, 12));
-		tarotkaarten.add(new Kaart("Koopman", 20, 16, 9));
+		tarotkaarten.add(new Kaart("Moordenaar", 27, 22, 12));
+		tarotkaarten.add(new Kaart("Predikant", 32, 24, 15));
+		tarotkaarten.add(new Kaart("Koopman", 22, 18, 10));
+		tarotkaarten.add(new Kaart("Bouwmeester", 23, 18, 10));
+		tarotkaarten.add(new Kaart("Koning", 21, 16, 12));
+		tarotkaarten.add(new Kaart("Magier", 27, 29, 18));
+		tarotkaarten.add(new Kaart("Condotierre", 16, 16, 10));
+		tarotkaarten.add(new Kaart("Dief", 20, 17, 9));
+		
 
 		System.out.println("Mystic T");
 		Lcd.print(2, "Druk een knop");
@@ -41,7 +47,7 @@ public class Mystic_T_Launcher {
 		Button.waitForAnyPress();
 		Button.LEDPattern(0);
 
-		// Instellen juiste sensot
+		// Instellen juiste sensor
 
 		color.setRGBMode();
 		color.setFloodLight(Color.WHITE);
@@ -64,7 +70,7 @@ public class Mystic_T_Launcher {
 
 			// checken of de kaart in de tarotarray voorkomt
 			for (Kaart kaart : tarotkaarten) {
-				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())) {
+				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())&& kaart.testKleur(groen, kaart.getGroen())) {
 					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					Sound.beep();
 					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
@@ -73,14 +79,6 @@ public class Mystic_T_Launcher {
 						Button.waitForAnyPress();
 					}
 				} else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(rood, kaart.getRood())) {
-					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
-					Sound.beep();
-					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
-					if (kaarten.size() < INPUT) {
-						Lcd.print(6, "Scan volgende kaart");
-						Button.waitForAnyPress();
-					}
-				} else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(blauw, kaart.getBlauw())) {
 					Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					Sound.beep();
 					kaarten.add(new Kaart(kaart.getNaamKaart(), rood, groen, blauw));
