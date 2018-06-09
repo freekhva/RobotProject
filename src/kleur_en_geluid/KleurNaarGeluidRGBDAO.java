@@ -38,7 +38,7 @@ public class KleurNaarGeluidRGBDAO
 	}
 	
 	// Select alle uit de db en stop ze in een arrayList....
-	public ArrayList<KleurNaarGeluidRGB> selecAlleKaartentUitDB()
+	public ArrayList<KleurNaarGeluidRGB> selecAlleNotenUitDB()
 	{
 		ArrayList<KleurNaarGeluidRGB> kleurenNoten = new ArrayList<>();
 		ResultSet rs = null;
