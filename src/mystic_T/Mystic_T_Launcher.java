@@ -120,7 +120,7 @@ public class Mystic_T_Launcher {
 			Lcd.print(i + 3, kaarten.get(i).getNaamKaart());
 
 		}
-		//uitspuge voorspelling
+		//uitspugen voorspelling
 		Lcd.clear(6);
 		Lcd.print(6, voorspelling(kaarten));
 		Button.waitForAnyPress();
@@ -139,8 +139,13 @@ public class Mystic_T_Launcher {
 	}
 
 	public static boolean checkDubbel(Kaart kaart, ArrayList<GekozenKaart> kaarten) {
-		for (int i = 0; i < kaarten.size(); i++) {
-			if (kaart.getNaamKaart() == kaarten.get(i).getNaamKaart()) {
+		if (kaarten.size()==1) {
+			if (kaart.getNaamKaart() == kaarten.get(0).getNaamKaart()) {
+				return true;
+			}
+		}
+		if (kaarten.size()==2) {
+			if (kaart.getNaamKaart() == kaarten.get(0).getNaamKaart() &&kaart.getNaamKaart() == kaarten.get(1).getNaamKaart()) {
 				return true;
 			}
 		}
