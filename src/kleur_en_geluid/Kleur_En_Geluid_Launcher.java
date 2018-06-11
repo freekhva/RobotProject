@@ -43,6 +43,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 	private static void kleurNaarGeluid() 
 	{
 		/////// Init vars //////
+		// Constants
+		final int VOLUME_HOOG = 100;
+		final int STANDAARD_DUUR = 200;
+		
 		// kleuren uit de db
 		// ArrayList<KleurNaarGeluid> kleurennoten = new KleurNaarGeluidDAO().selecAlleNotenUitDB();
 		ArrayList<KleurNaarGeluid> kleurennoten = new KleurNaarGeluidARR().getArrKleurennoten();
@@ -106,11 +110,11 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 							Lcd.clear(4);
 							Lcd.print(4, "%d", ( stopTijd - startTijd ) );
 						frequentie = kleurennoten.get(i).getFrequentie();
-						Sound.setVolume( 100 );
+						Sound.setVolume( VOLUME_HOOG );
 					}
 				}
 				// Speel noot
-				Sound.playNote( Sound.PIANO, frequentie, 100 );
+				Sound.playNote( Sound.PIANO, frequentie, STANDAARD_DUUR );
 				
 				// Show on screen...
 				Lcd.clear(4);
@@ -138,7 +142,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		String strTotal = "";
 		for(int i = 1; i  < muziekstuk.size(); i++) 
 		{
-			Sound.setVolume( 100 );
+			Sound.setVolume( VOLUME_HOOG );
 			Sound.playNote( Sound.PIANO, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuur() ); // (int)muziekstuk.get(i).getDuur()
 
 			strTotal += String.format("Kleur: %s Duur: %d \n", 
@@ -173,27 +177,3 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		}		
 	}
 }
-
-
-//////// OLD STUFF /////////
-//afspelen van de juiste noten		
-//public static void Geluid(String kleur){ 
-//	switch (kleur) {
-//	case "Red": Sound.playTone( 880, 80); //A5
-//		break;
-//	case "Yellow": Sound.playTone(988, 80); //B5
-//		break;	
-//	case "Brown": Sound.playTone(523, 80); //C5
-//		break;
-//	case "Green": Sound.playTone(587, 80); //D5
-//		break;
-//	case "White": Sound.playTone(659, 80); //E5
-//		break;	
-//	case "Black": Sound.playTone(698, 80); //F5
-//		break;
-//	case "Blue": Sound.playTone(784, 80); //G5
-//		break;
-//	default: Lcd.print(7, "Geen input");
-//		break;
-//	}
-//}
