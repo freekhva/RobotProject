@@ -76,6 +76,7 @@ public class Jukebox extends Thread
 	
 	// Length of a quarter note
 	final static int BEAT = 250;
+	final static int HALF_BEAT = 125;
 	// Sleep time in ms before resuming thread when nothing is playing
 	final static int SLEEP = 100;
 	// Indicates a pause
@@ -96,7 +97,16 @@ public class Jukebox extends Thread
 
 	// More melodies
 	
-	final static int ATEAM_THEME[][] = 
+	final static int ATEAM_THEME[][] =  
+		{
+		
+				{F6, BEAT}, {C6, HALF_BEAT}, {F6, BEAT}, {PAUSE,BEAT}, 
+				{AIS5, HALF_BEAT}, {C6, BEAT}, {F5, BEAT}, {PAUSE,BEAT},
+				{A5, HALF_BEAT}, {C6, HALF_BEAT}, {F6, HALF_BEAT}, {C6, HALF_BEAT}, {G6, BEAT}, {F6, BEAT}, {PAUSE,BEAT},
+				{DIS6, BEAT}, {D6, 0,BEAT}, {C6, 0,HALF_BEAT}, {AIS5, BEAT}, {C6, BEAT}
+		};
+	
+	final static int ATEAM_THEME2[][] = 
 		{
 				
 				{F6, BEAT}, {C6, 0,5*BEAT},	{F6, 0,5*BEAT},{F6, 2*BEAT}, 

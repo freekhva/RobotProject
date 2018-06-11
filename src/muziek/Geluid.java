@@ -27,6 +27,8 @@ public class Geluid extends java.lang.Object implements Sounds {
 		 Jukebox player = new Jukebox();
 		
 		 player.play(Jukebox.ATEAM_THEME, false);
+		 Button.waitForAnyPress();
+		 player.off();
 
 		// afspelen stoppen
 		// player.off();
