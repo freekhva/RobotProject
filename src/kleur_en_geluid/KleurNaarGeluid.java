@@ -20,6 +20,11 @@ public class KleurNaarGeluid // implements Sounds
 
 	public double getDuur() 
 	{
+		return this.duur = this.duur;
+	}
+	
+	public double getDuurMetExtraDuration() 
+	{
 		return this.duur = this.duur + XTRA_DURATION;
 	}
 

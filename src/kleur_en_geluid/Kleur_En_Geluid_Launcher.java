@@ -113,7 +113,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 						Sound.setVolume( VOLUME_HOOG );
 					}
 				}
-				// Speel noot
+				// Speel noot 1 maal
 				Sound.playNote( Sound.PIANO, frequentie, STANDAARD_DUUR );
 				
 				// Show on screen...
@@ -143,7 +143,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		for(int i = 1; i  < muziekstuk.size(); i++) 
 		{
 			Sound.setVolume( VOLUME_HOOG );
-			Sound.playNote( Sound.PIANO, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuur() ); // (int)muziekstuk.get(i).getDuur()
+			Sound.playNote( Sound.PIANO, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
 
 			strTotal += String.format("Kleur: %s Duur: %d \n", 
 					muziekstuk.get(i).getKleur(),
