@@ -7,7 +7,7 @@ package kleur_en_geluid;
 
 public class KleurNaarGeluid // implements Sounds
 {
-	private final int XTRA_DURATION = 500;
+	private final long XTRA_DURATION = 500;
 	private String kleur;
 	private int frequentie;
 	private String nootcode;
@@ -20,7 +20,7 @@ public class KleurNaarGeluid // implements Sounds
 
 	public double getDuur() 
 	{
-		return this.duur = this.duur * XTRA_DURATION;
+		return this.duur = this.duur + XTRA_DURATION;
 	}
 
 	public int getFrequentie() 

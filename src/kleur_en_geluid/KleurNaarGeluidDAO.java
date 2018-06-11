@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class KleurNaarGeluidRGBDAO 
+public class KleurNaarGeluidDAO 
 {
 	private static String dbNaam = "kleurgeluid";
 	private static String dbDirRobot = "/home/root/";
@@ -19,7 +19,7 @@ public class KleurNaarGeluidRGBDAO
 	private Statement stmt = null;
 	private PreparedStatement prepstmt = null;
 	    
-	public KleurNaarGeluidRGBDAO()
+	public KleurNaarGeluidDAO()
 	{
 	}
 	
@@ -38,9 +38,9 @@ public class KleurNaarGeluidRGBDAO
 	}
 	
 	// Select alle uit de db en stop ze in een arrayList....
-	public ArrayList<KleurNaarGeluidRGB> selecAlleNotenUitDB()
+	public ArrayList<KleurNaarGeluid> selecAlleNotenUitDB()
 	{
-		ArrayList<KleurNaarGeluidRGB> kleurenNoten = new ArrayList<>();
+		ArrayList<KleurNaarGeluid> kleurenNoten = new ArrayList<>();
 		ResultSet rs = null;
 		String strSql = "SELECT * FROM kleurnoot";
 		try 
@@ -51,11 +51,9 @@ public class KleurNaarGeluidRGBDAO
 			// Vul arrayList
 			while( rs.next() )
 			{
-
-				kleurenNoten.add( new KleurNaarGeluidRGB(
-						rs.getInt("rood"),
-						rs.getInt("groen"),
-						rs.getInt("blauw"),
+				kleurenNoten.add( new KleurNaarGeluid(
+						rs.getString("kleur"),
+						rs.getString("nootcode"),
 						rs.getInt("frequentie")
 						) );
 			}
