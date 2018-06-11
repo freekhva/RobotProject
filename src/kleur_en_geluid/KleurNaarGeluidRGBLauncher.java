@@ -19,6 +19,16 @@ public class KleurNaarGeluidRGBLauncher
 
 	public static void main(String[] args) 
 	{
+		/////// Kleur naar geluid programma ///////
+		kleurNaarGeluidRgb();
+		
+		/////// Meet Kleuren ///////
+		meetKleuren();
+	}
+
+	// Methode om te scannen....
+	private static void kleurNaarGeluidRgb() 
+	{
 		/////// Init vars //////
 		// kleuren uit de db
 //		ArrayList<KleurNaarGeluidRGB> kleurennoten = new KleurNaarGeluidRGBDAO().selecAlleNotenUitDB();
@@ -26,7 +36,7 @@ public class KleurNaarGeluidRGBLauncher
 		ArrayList<KleurNaarGeluidRGB> muziekstuk = new ArrayList<>();
 		
 		// Instellen juiste sensor
-		ColorSensor colorsensor = new ColorSensor(SensorPort.S1);
+		ColorSensor colorsensor = new ColorSensor(SensorPort.S3);
 		colorsensor.setRGBMode();
 		colorsensor.setFloodLight(Color.WHITE);
 		Color rgb;
@@ -57,12 +67,15 @@ public class KleurNaarGeluidRGBLauncher
 
 		//Starten opname
         Lcd.clear(2);
-		Lcd.print(2, "Rijden maar!");
+		Lcd.print(2, "Druk de button en rijden maar!");
         Button.waitForAnyPress();
         
         // set motors to 50% power en rijden maar.
-        motorL.setPower(20);
-        motorR.setPower(20);
+        motorL.setPower(10);
+        motorR.setPower(10);
+        
+        // Set Starttijd
+        stopwatch.setStartTijd( System.currentTimeMillis() );
         
         /////// Doorloop het process in while loop //////
         do
@@ -81,7 +94,7 @@ public class KleurNaarGeluidRGBLauncher
                 		stopwatch.setStartTijd( System.currentTimeMillis() );
                 		
                 		Sound.setVolume( 50 );
-                		Sound.playNote(Sound.PIANO, kleurennoten.get(i).getFrequentie(), 5);
+                		Sound.playNote(Sound.PIANO, kleurennoten.get(i).getFrequentie(), 50);
                 	}
     			}
         		
@@ -89,7 +102,7 @@ public class KleurNaarGeluidRGBLauncher
         	}
         	
         	// Stoppen of verder gaan...
-        	Lcd.print(3, "rood=%d groen=%d blauw=%d", 
+        	Lcd.print(3, "R=%d G=%d B=%d", 
         			HuidigkleurRgb.getRed(),
         			HuidigkleurRgb.getGreen(),
         			HuidigkleurRgb.getBlue()
@@ -120,23 +133,29 @@ public class KleurNaarGeluidRGBLauncher
 		motorR.close();
 		
 		Sound.beepSequence(); // we are done.
-
 		Button.LEDPattern(4);
 	}
-	
-	// Sound.playNote(Sound.PIANO, 587, 5);
-	
+		
 	// KleurenMeter
-	public static void meetKleuren( Color rgb, ColorSensor sensor )
+	public static void meetKleuren()
 	{
 		Button.waitForAnyPress();
+		
+		// Instellen juiste sensor
+				ColorSensor colorsensor = new ColorSensor(SensorPort.S3);
+				colorsensor.setRGBMode();
+				colorsensor.setFloodLight(Color.WHITE);
+				Color rgb = new Color( 0,0,0 );
 		
 		System.out.println("Get Color Waarde....");
 		while( Button.ESCAPE.isUp() )
 		{
-			rgb = sensor.getColor();
+			System.out.println("Druk op de button en scan een kleur in....");
+			Button.waitForAnyPress();
 			
-			System.out.println( String.format("Rood: %d, Groen: %d, Blauw: %d", rgb.getRed(),
+			rgb = colorsensor.getColor();
+			
+			System.out.println( String.format("R: %d, G: %d, B: %d", rgb.getRed(),
 					rgb.getGreen(),
 					rgb.getBlue()
 					));

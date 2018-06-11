@@ -8,11 +8,11 @@ public class KleurNaarGeluidRGBARR
 	
 	public ArrayList<KleurNaarGeluidRGB> getArrKleurennoten()
 	{
-		arrkleurennoten.add( new KleurNaarGeluidRGB( 9, 4, 56, "C7", 2093 ));
-		arrkleurennoten.add( new KleurNaarGeluidRGB( 32, 70, 18, "B6", 1975 ));
-		arrkleurennoten.add( new KleurNaarGeluidRGB( 68, 8, 6, "AIS6", 1865 ));
-		arrkleurennoten.add( new KleurNaarGeluidRGB( 75, 52, 21, "A6", 1760 ));
-		arrkleurennoten.add( new KleurNaarGeluidRGB( 78, 16, 10, "G6", 1568 ));
+		arrkleurennoten.add( new KleurNaarGeluidRGB( 8, 30, 2, "C7", 2093 ));
+		arrkleurennoten.add( new KleurNaarGeluidRGB( 74, 44, 12, "B6", 1975 ));
+		arrkleurennoten.add( new KleurNaarGeluidRGB( 63, 6, 4, "AIS6", 1865 ));
+		arrkleurennoten.add( new KleurNaarGeluidRGB( 28, 55, 9, "A6", 1760 ));
+		arrkleurennoten.add( new KleurNaarGeluidRGB( 71, 13, 5, "G6", 1568 ));
 		
 		return arrkleurennoten;
 	}
