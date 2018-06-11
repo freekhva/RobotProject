@@ -63,8 +63,8 @@ public class MitchParcourRijden {
 		System.out.println("Black value: " +black);
 		
 		midpoint = ( white - black ) / 2 + black;
-		midpoint2 = ( white - black ) /2 + black;
-		kp = (float) 4; 
+		midpoint2 = ( white - black ) / 2 + black;
+		kp = (float) 3; 
 		ki = (float) 0; 
 		kd = (float) 0;
 		lasterror = 0;
@@ -86,8 +86,8 @@ public class MitchParcourRijden {
 			correction = (correction * 100);
 			
 			if (ambient > midpoint && ambient2 > midpoint2) {
-				motorL.setPower(50);
-		        motorR.setPower(50);	
+				motorL.setPower(75);
+		        motorR.setPower(75);	
 			}
 			else if ( ambient < midpoint && ambient2 > midpoint) {
 				motorR.setPower( (FULL_POWER + (int) correction));
