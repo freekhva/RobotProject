@@ -66,17 +66,16 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
 		Lcd.print(1, "Start het programma...");
-
+		
 		Button.LEDPattern(4); // flash green led and
 		Sound.beepSequenceUp(); // make sound when ready.
 
 		Button.waitForAnyPress();
 		Button.LEDPattern(0);
-
-		// Starten van de sensor
+		Lcd.clear(1);
 
 		Delay.msDelay(1000);
-
+		
 		color.setColorIdMode();
 		color.setFloodLight(Color.WHITE);
 

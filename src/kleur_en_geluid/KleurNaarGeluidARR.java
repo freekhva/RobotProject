@@ -21,12 +21,3 @@ public class KleurNaarGeluidARR
 		return arrkleurennoten;
 	}
 }
-
-//F6  - 1397
-//C6 - 1046, 
-//AIS5 - 932, 
-//F5 - 698,
-//A5 - 880, 
-//G6 -  1568, 
-//DIS6
-//D6 - 1175
