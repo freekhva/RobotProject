@@ -56,8 +56,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		String kleurmeter;
 		int frequentie = 0;
 		
-		// Stopwatch stopwatch =  new Stopwatch();
-		long startTijd = System.currentTimeMillis();
+		long startTijd = System.currentTimeMillis(); // Set begintijd
 		long stopTijd = 0;
 		TouchSensor touch = new TouchSensor();
 		ColorSensor color = new ColorSensor(SensorPort.S3);
@@ -66,13 +65,12 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
 		Lcd.print(1, "Start het programma...");
-		
 		Button.LEDPattern(4); // flash green led and
 		Sound.beepSequenceUp(); // make sound when ready.
 
 		Button.waitForAnyPress();
 		Button.LEDPattern(0);
-		Lcd.clear(1);
+		Lcd.clear(); // Clear the display
 
 		Delay.msDelay(1000);
 		
@@ -81,13 +79,12 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 
 		//kleursensor een meting laten doen om hem te initialiseren
 		kleur = ColorSensor.colorName(color.getColorID());
-		Lcd.clear(2);
 		Lcd.print(2,"Beginkleur =" + kleur);
 
 		//Starten opname
-		Lcd.clear(3);
 		Lcd.print(3, "Rijden maar!");
 		Button.waitForAnyPress();
+		Lcd.clear(); // Clear the display
 
 		// set motors to 50% power en rijden maar.
 		motorL.setPower(20);
@@ -106,8 +103,6 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 					if( kleurennoten.get(i).getKleur().equals( kleur ) )
 					{
 						muziekstuk.add( new KleurNaarGeluid( kleur, kleurennoten.get(i).getFrequentie(), (stopTijd - startTijd ) ) );
-							Lcd.clear(4);
-							Lcd.print(4, "%d", ( stopTijd - startTijd ) );
 						frequentie = kleurennoten.get(i).getFrequentie();
 						Sound.setVolume( VOLUME_HOOG );
 					}
@@ -116,10 +111,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 				Sound.playNote( Sound.PIANO, frequentie, STANDAARD_DUUR );
 				
 				// Show on screen...
-				Lcd.clear(4);
-				Lcd.print(4, "Kleur=%s", kleur );
-				Lcd.clear(5);
-				Lcd.print(5, "Druk op escape om te stoppen");
+				Lcd.clear();
+				Lcd.print(1, "Kleur=%s", kleur );
+				Lcd.clear(2);
+				Lcd.print(2, "Druk op escape om te stoppen");
 			}
 			// Get kleur van colorsensor
 			kleur = ColorSensor.colorName( color.getColorID() );
@@ -134,8 +129,8 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		motorR.stop();
 
 		// Afspelen van de ArrayList
-		Lcd.clear(6);
-		Lcd.print(6, "Druk voor afspelen...");
+		Lcd.clear();
+		Lcd.print(1, "Druk voor afspelen...");
 		Button.waitForAnyPress();
 
 		String strTotal = "";
@@ -150,17 +145,17 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 					);
 		}
 		
-		Lcd.clear(7);
-		Lcd.print(8, "Klaar." + strTotal);
+		Lcd.clear();
+		Lcd.print(1, "Klaar." + strTotal);
 		Button.waitForAnyPress();
 
 		// free up resources.
 		color.close();
 		motorL.close(); 
 		motorR.close();
-
-		Sound.beepSequence(); // we are done.
-
+		
+		// klaar
+		Sound.beepSequence();
 		Button.LEDPattern(4);
 	}
 	
