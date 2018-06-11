@@ -20,10 +20,13 @@ public class KleurNaarGeluidRGBLauncher
 	public static void main(String[] args) 
 	{
 		/////// Kleur naar geluid programma ///////
-		kleurNaarGeluidRgb();
+		// kleurNaarGeluidRgb();
 		
-		/////// Meet Kleuren ///////
-		meetKleuren();
+		/////// Meet Kleuren RGB ///////
+		// meetKleurenRGB();
+		
+		/////// Meet Kleuren ID ///////
+		meetKleurenOpID();
 	}
 
 	// Methode om te scannen....
@@ -136,16 +139,16 @@ public class KleurNaarGeluidRGBLauncher
 		Button.LEDPattern(4);
 	}
 		
-	// KleurenMeter
-	public static void meetKleuren()
+	// KleurenMeter RGB
+	public static void meetKleurenRGB()
 	{
 		Button.waitForAnyPress();
 		
 		// Instellen juiste sensor
-				ColorSensor colorsensor = new ColorSensor(SensorPort.S3);
-				colorsensor.setRGBMode();
-				colorsensor.setFloodLight(Color.WHITE);
-				Color rgb = new Color( 0,0,0 );
+		ColorSensor colorsensor = new ColorSensor(SensorPort.S3);
+		colorsensor.setRGBMode();
+		colorsensor.setFloodLight(Color.WHITE);
+		Color rgb = new Color( 0,0,0 );
 		
 		System.out.println("Get Color Waarde....");
 		while( Button.ESCAPE.isUp() )
@@ -161,4 +164,29 @@ public class KleurNaarGeluidRGBLauncher
 					));
 		}
 	}
+	
+	// KleurenMeter 
+		public static void meetKleurenOpID()
+		{
+			Button.waitForAnyPress();
+			
+			// Instellen juiste sensor
+			ColorSensor colorsensor = new ColorSensor(SensorPort.S3);
+			colorsensor.setColorIdMode();
+			colorsensor.setFloodLight(Color.WHITE);
+			String kleur;
+			
+			System.out.println("Get Color Waarde....");
+			while( Button.ESCAPE.isUp() )
+			{
+				System.out.println("Druk op de button en scan een kleur in....");
+				Button.waitForAnyPress();
+				
+				kleur = ColorSensor.colorName( colorsensor.getColorID() );
+				
+				System.out.println( String.format("KLeurId: %s ", 
+						kleur
+						));
+			}
+		}
 }

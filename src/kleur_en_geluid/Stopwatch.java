@@ -5,7 +5,6 @@ public class Stopwatch {
 	//Begin tijd
 	private long startTijd;
 
-
 	public Stopwatch(){
 		startTijd = System.currentTimeMillis();
 	}
@@ -14,16 +13,12 @@ public class Stopwatch {
 		return startTijd;
 	}
 
-
-
 	public void setStartTijd(long startTijd) {
 		this.startTijd = System.currentTimeMillis();
 	}
-
-	
 	
 	// duur bepalen
-	public double toonDuur() {
+	public long toonDuur() {
 		long now = System.currentTimeMillis();
         return (now - startTijd)/1000;
 	}
