@@ -50,7 +50,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		final int VOLUME_HOOG = 100;
 		final int VOLUME_MID = 50;
 		final int STANDAARD_DUUR = 200;
-		final int MOTOR_POWER = 20;
+		final int MOTOR_POWER = 30; // 20
 		
 		// kleuren uit de db laden
 		Lcd.print(1, "Laad database in array...");
