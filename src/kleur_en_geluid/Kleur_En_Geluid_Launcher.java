@@ -52,7 +52,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		final int STANDAARD_DUUR = 200;
 		final int MOTOR_POWER = 20;
 		
-		// kleuren uit de db
+		// kleuren uit de db laden
 		Lcd.print(1, "Laad database in array...");
 
 		ArrayList<KleurNaarGeluid> kleurennoten = new ArrayList<>();
