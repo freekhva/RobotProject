@@ -8,11 +8,11 @@ public class KleurNaarGeluidARR
 	
 	public ArrayList<KleurNaarGeluid> getArrKleurennoten()
 	{
-		arrkleurennoten.add( new KleurNaarGeluid( "Black", "F6", 1397 ));
+		arrkleurennoten.add( new KleurNaarGeluid( "Blue", "F6", 1397 ));
 		arrkleurennoten.add( new KleurNaarGeluid( "White", "C6", 1046 ));
 		arrkleurennoten.add( new KleurNaarGeluid( "Green", "AIS5", 932 ));
 		arrkleurennoten.add( new KleurNaarGeluid( "Red", "F5", 698 ));
-		arrkleurennoten.add( new KleurNaarGeluid( "Blue", "A5", 880 ));
+		arrkleurennoten.add( new KleurNaarGeluid( "Black", "A5", 880 ));
 		
 		// Moeilijke kleuren noten
 		arrkleurennoten.add( new KleurNaarGeluid( "Yellow", "G6", 1568 ));

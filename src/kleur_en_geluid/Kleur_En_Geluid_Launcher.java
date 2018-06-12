@@ -35,8 +35,9 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 {
 	public static void main(String[] args) 
 	{
-		kleurNaarGeluid();
+		 kleurNaarGeluid();
 		// duurTijd();
+		// calibrateTest();
 	}
 	
 	// KLeur naar geluid methode
@@ -157,6 +158,28 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		// klaar
 		Sound.beepSequence();
 		Button.LEDPattern(4);
+	}
+	
+	// Test Calibratie
+	public static void calibrateTest()
+	{
+		ColorSensor color = new ColorSensor(SensorPort.S3);
+
+		// Calibrate sensor
+		float yellow;
+		float brown;
+		 while( Button.ESCAPE.isUp() )
+		 {
+			 System.out.println("Yellow?");
+				Button.waitForAnyPress();
+				yellow = color.getAmbient();
+					System.out.println("Yellow " + yellow);
+
+				System.out.println("Brown?");
+				Button.waitForAnyPress();
+				brown = color.getAmbient();
+					System.out.println("Yellow " + brown);
+		 }
 	}
 	
 	// Test CurrentTijd
