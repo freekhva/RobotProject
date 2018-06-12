@@ -18,12 +18,12 @@ public class KleurNaarGeluid // implements Sounds
 		return kleur;
 	}
 
-	public double getDuur() 
+	public long getDuur() 
 	{
 		return this.duur = this.duur;
 	}
 	
-	public double getDuurMetExtraDuration() 
+	public long getDuurMetExtraDuration() 
 	{
 		return this.duur = this.duur + XTRA_DURATION;
 	}

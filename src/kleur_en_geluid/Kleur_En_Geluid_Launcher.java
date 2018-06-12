@@ -38,6 +38,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		 kleurNaarGeluid();
 		// duurTijd();
 		// calibrateTest();
+		// testKleurenSensor();
 	}
 	
 	// KLeur naar geluid methode
@@ -46,7 +47,9 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		/////// Init vars //////
 		// Constants
 		final int VOLUME_HOOG = 100;
+		final int VOLUME_MID = 50;
 		final int STANDAARD_DUUR = 200;
+		final int MOTOR_POWER = 20;
 		
 		// kleuren uit de db
 		// ArrayList<KleurNaarGeluid> kleurennoten = new KleurNaarGeluidDAO().selecAlleNotenUitDB();
@@ -87,9 +90,9 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		Button.waitForAnyPress();
 		Lcd.clear(); // Clear the display
 
-		// set motors to 50% power en rijden maar.
-		motorL.setPower(20);
-		motorR.setPower(20);
+		// set motors to power en rijden maar.
+		motorL.setPower( MOTOR_POWER );
+		motorR.setPower( MOTOR_POWER );
 		
 		// kleuren opslaan in ArrayList				
 		do 
@@ -137,7 +140,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		String strTotal = "";
 		for(int i = 1; i  < muziekstuk.size(); i++) 
 		{
-			Sound.setVolume( VOLUME_HOOG );
+			Sound.setVolume( VOLUME_MID );
 			Sound.playNote( Sound.PIANO, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
 
 			strTotal += String.format("Kleur: %s Duur: %d \n", 
@@ -166,19 +169,19 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		ColorSensor color = new ColorSensor(SensorPort.S3);
 
 		// Calibrate sensor
-		float yellow;
-		float brown;
+		float black;
+		float white;
 		 while( Button.ESCAPE.isUp() )
 		 {
-			 System.out.println("Yellow?");
+			 System.out.println("Black?");
 				Button.waitForAnyPress();
-				yellow = color.getAmbient();
-					System.out.println("Yellow " + yellow);
+				black = color.getAmbient();
+					System.out.println("Black " + black);
 
-				System.out.println("Brown?");
+				System.out.println("White?");
 				Button.waitForAnyPress();
-				brown = color.getAmbient();
-					System.out.println("Yellow " + brown);
+				white = color.getAmbient();
+					System.out.println("White " + white);
 		 }
 	}
 	
@@ -192,5 +195,23 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 			eindTijd = ( System.currentTimeMillis() - begintTijd );
 			System.out.println( (int)eindTijd );
 		}		
+	}
+	
+	// Test KLeur Sensor
+	public static void testKleurenSensor()
+	{
+		ColorSensor color = new ColorSensor(SensorPort.S3);
+		color.setColorIdMode();
+		color.setFloodLight(Color.WHITE);
+
+		//kleursensor een meting laten doen om hem te initialiseren
+		System.out.println("Meet een kleur...");
+		while ( true )
+		{
+			Button.waitForAnyPress();
+			String kleur = ColorSensor.colorName(color.getColorID());
+				System.out.println("Kleur: " + kleur);
+		}
+		
 	}
 }
