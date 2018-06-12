@@ -11,7 +11,7 @@ public class ColorDemo
 {
     public static void main(String[] args)
     {
-        ColorSensor color = new ColorSensor(SensorPort.S3);
+        ColorSensor color = new ColorSensor(SensorPort.S1);
 
         System.out.println("Color Demo");
         Lcd.print(2, "Press to start");

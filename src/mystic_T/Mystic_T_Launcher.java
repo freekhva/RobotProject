@@ -23,19 +23,31 @@ public class Mystic_T_Launcher {
 		int groen;
 		final int INPUT = 3;
 
-		ArrayList<GekozenKaart> kaarten = new ArrayList<>();
+		ArrayList<Kaart> kaarten = new ArrayList<>();
 		ArrayList<Kaart> tarotkaarten = new ArrayList<Kaart>();
-		tarotkaarten.add(new Kaart("Rood", 57, 5, 4));
-		tarotkaarten.add(new Kaart("Groen", 11, 35, 8));
-		tarotkaarten.add(new Kaart("Blauw", 8, 38, 38));
-		tarotkaarten.add(new Kaart("Moordenaar", 27, 22, 12));
-		tarotkaarten.add(new Kaart("Predikant", 32, 24, 15));
-		tarotkaarten.add(new Kaart("Koopman", 22, 18, 10));
-		tarotkaarten.add(new Kaart("Bouwmeester", 23, 18, 10));
-		tarotkaarten.add(new Kaart("Koning", 21, 16, 12));
-		tarotkaarten.add(new Kaart("Magier", 27, 29, 18));
-		tarotkaarten.add(new Kaart("Condotierre", 16, 16, 10));
-		tarotkaarten.add(new Kaart("Dief", 20, 17, 9));
+		tarotkaarten.add(new Kaart(2,"Klaverbladen",61,70,59,0,1));
+		tarotkaarten.add(new Kaart(3,"Schip",66,78,57,1,2));
+		tarotkaarten.add(new Kaart(4,"Huis",63,62,40,0,2));
+		tarotkaarten.add(new Kaart(6,"Wolken",49,50,27,0,1));
+		tarotkaarten.add(new Kaart(7,"Slang",74,84,62,2,1));
+		tarotkaarten.add(new Kaart(10,"Zeisen",53,58,39,0,1));
+		tarotkaarten.add(new Kaart(12,"Vogels",46,56,24,0,0));
+		tarotkaarten.add(new Kaart(11,"Roede",60,62,50,0,1));
+		tarotkaarten.add(new Kaart(14,"Vosje",51,57,23,2,1));
+		tarotkaarten.add(new Kaart(15,"Beer",33,41,20,0,2));
+		tarotkaarten.add(new Kaart(16,"Ster",48,81,62,0,2));
+		tarotkaarten.add(new Kaart(17,"Ooievaar",39,56,25,0,0));
+		tarotkaarten.add(new Kaart(18,"Hond",55,61,30,2,2));
+		tarotkaarten.add(new Kaart(19,"Toren",48,43,42,0,1));
+		tarotkaarten.add(new Kaart(21,"Berg",45,46,21,0,1));
+		tarotkaarten.add(new Kaart(23,"Muizen",41,46,23,1,2));
+		tarotkaarten.add(new Kaart(25,"Ring",49,43,45,2,0));
+		tarotkaarten.add(new Kaart(27, "Brief",82,83,55,0,2));
+		tarotkaarten.add(new Kaart(28,"Heer",48,40,17,0,0));
+		tarotkaarten.add(new Kaart(30, "Lelie",70,78,58,3,2));
+		tarotkaarten.add(new Kaart(31,"Zonne",77,70,32,0,2));
+		tarotkaarten.add(new Kaart(34,"Vissen",63,73,49,0,2));
+		tarotkaarten.add(new Kaart(36,"Kruis",74,95,727,0,1));
 
 		System.out.println("Mystic T");
 		Lcd.print(2, "Druk een knop");
@@ -56,7 +68,8 @@ public class Mystic_T_Launcher {
 		Lcd.clear(3);
 		Lcd.print(3, "Scan een kaart");
 		Button.waitForAnyPress();
-
+		//legos.hardware.Sound.playSample(trump.wav);
+		
 		do {
 			rgb = color.getColor();
 
@@ -80,7 +93,7 @@ public class Mystic_T_Launcher {
 							Lcd.clear(5);
 							Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 							Sound.beep();
-							kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
+							kaarten.add(kaart);
 							if (kaarten.size() < INPUT) {
 								Lcd.print(6, "Scan volgende kaart");
 								Button.waitForAnyPress();
@@ -90,7 +103,7 @@ public class Mystic_T_Launcher {
 						Lcd.clear(5);
 						Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 						Sound.beep();
-						kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
+						kaarten.add(kaart);
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
 					}
@@ -100,7 +113,7 @@ public class Mystic_T_Launcher {
 					// Lcd.clear(5);
 					// Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
 					// Sound.beep();
-					// kaarten.add(new GekozenKaart(kaart.getNaamKaart(), rood, groen, blauw));
+					// kaarten.add(kaart));
 					// if (kaarten.size() < INPUT) {
 					// Lcd.print(6, "Scan volgende kaart");
 					// Button.waitForAnyPress();
@@ -118,11 +131,14 @@ public class Mystic_T_Launcher {
 		for (int i = 0; i < kaarten.size(); i++) {
 			Lcd.clear(i + 3);
 			Lcd.print(i + 3, kaarten.get(i).getNaamKaart());
-
+	
 		}
-		//uitspugen voorspelling
+		//maakt voorspelling
+		Voorspelling2 zegwaar  =  new Voorspelling2(kaarten);
+		
+				//uitspugen voorspelling
 		Lcd.clear(6);
-		Lcd.print(6, voorspelling(kaarten));
+		Lcd.print(6, zegwaar.toString());
 		Button.waitForAnyPress();
 
 		// Weet niet of deze nodig is
@@ -138,27 +154,18 @@ public class Mystic_T_Launcher {
 
 	}
 
-	public static boolean checkDubbel(Kaart kaart, ArrayList<GekozenKaart> kaarten) {
+	public static boolean checkDubbel(Kaart kaart, ArrayList<Kaart> kaarten) {
 		if (kaarten.size()==1) {
 			if (kaart.getNaamKaart() == kaarten.get(0).getNaamKaart()) {
 				return true;
 			}
 		}
 		if (kaarten.size()==2) {
-			if (kaart.getNaamKaart() == kaarten.get(0).getNaamKaart() &&kaart.getNaamKaart() == kaarten.get(1).getNaamKaart()) {
+			if (kaart.getNaamKaart() == kaarten.get(0).getNaamKaart() || kaart.getNaamKaart() == kaarten.get(1).getNaamKaart()) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static String voorspelling(ArrayList<GekozenKaart> kaarten) {
-		int werk = kaarten.get(0).getToekomstwaarde() * 100;
-		int liefde = kaarten.get(1).getToekomstwaarde() * 10;
-		int gezondheid = kaarten.get(2).getToekomstwaarde();
-		int voorspelling = werk + liefde + gezondheid;
-		Voorspelling eindvoorspelling = new Voorspelling(voorspelling);
-
-		return eindvoorspelling.maakVoorspelling();
-	}
 }
