@@ -13,7 +13,7 @@ public class Voorspelling2 {
 	final int ROEDEKAART = 11;
 	final int WOLKKAART = 6;
 	final int RINGKAART = 25;
-	final int[] WOLKNEGATIEF = new int[] {16, 18, 30, 27}; 
+	final int[] WOLKNEGATIEF = new int[] {2, 16, 18, 30, 27}; 
 	
 	// constructor
 	public Voorspelling2(ArrayList<Kaart> kaarten){
@@ -76,15 +76,15 @@ public class Voorspelling2 {
 
 
 	public int kiesType(){
-	if(kaartAanwezig(SLANGKAART) == true || kaartAanwezig(ROEDEKAART) == true || kaartAanwezig(ROEDEKAART) == true){ //super negatieve kaarten
+	if(kaartAanwezig(SLANGKAART) == true || kaartAanwezig(ROEDEKAART) == true || kaartAanwezig(BEERKAART) == true){ //super negatieve kaarten
 		return 1;
 	}
+	if (wolkGevoelig() == true && kaartAanwezig(WOLKKAART) == true){ //Kijken of de wolkkaart aanwezig is en er wolkgevoelige kaarten
+		return 1;
+	 }
 	if (kaartAanwezig(WOLKKAART) == true && sumType() ==4){ //kijken of de wolk kaart aanwezig is
 		return 2;
 	}  
-	 if (wolkGevoelig() == true && kaartAanwezig(WOLKKAART) == true){ //Kijken of de wolkkaart aanwezig is en er wolkgevoelige kaarten
-		return 1;
-	 }
 	 
 	 if (kaartAanwezig(RINGKAART) == true && kaarten.get(0).getNummer() == RINGKAART) { //ringkaart implementeren
 		 return 1;

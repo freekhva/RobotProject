@@ -8,6 +8,8 @@ import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.Color;
 import lejos.utility.Delay;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import mystic_T.*; // freek toegevoegd, omdat anders Kaart niet meer herkend werd
@@ -37,8 +39,8 @@ public class Mystic_T_Launcher {
 		tarotkaarten.add(new Kaart(15,"Beer",33,41,20,0,2));
 		tarotkaarten.add(new Kaart(16,"Ster",48,81,62,0,2));
 		tarotkaarten.add(new Kaart(17,"Ooievaar",39,56,25,0,0));
-		tarotkaarten.add(new Kaart(18,"Hond",55,61,30,2,2));
-		tarotkaarten.add(new Kaart(19,"Toren",48,43,42,0,1));
+		tarotkaarten.add(new Kaart(18,"Hond",55,61,37,2,2));
+		tarotkaarten.add(new Kaart(19,"Toren",52,49,35,0,1));
 		tarotkaarten.add(new Kaart(21,"Berg",45,46,21,0,1));
 		tarotkaarten.add(new Kaart(23,"Muizen",41,46,23,1,2));
 		tarotkaarten.add(new Kaart(25,"Ring",49,43,45,2,0));
@@ -65,10 +67,11 @@ public class Mystic_T_Launcher {
 
 		Color rgb;
 
+		
 		Lcd.clear(3);
 		Lcd.print(3, "Scan een kaart");
 		Button.waitForAnyPress();
-		//legos.hardware.Sound.playSample(trump.wav);
+		
 		
 		do {
 			rgb = color.getColor();
