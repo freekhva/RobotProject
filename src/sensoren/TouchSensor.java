@@ -6,7 +6,7 @@ import lejos.hardware.sensor.SensorMode;
 
 public class TouchSensor 
 {
-	private EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S2); // = new EV3TouchSensor(SensorPort.S2);
+	private EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S3); // = new EV3TouchSensor(SensorPort.S2);
 	private float[] sample = new float[ this.touch.sampleSize() ]; // Sample Meter
 	private final float touchWaarde = (float) 0.5;
 	

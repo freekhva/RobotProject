@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class KleurNaarGeluidDAO 
 {
-	private static String dbNaam = "kleurgeluid";
+	private static String dbNaam = "kleurengeluid";
 	private static String dbDirRobot = "/home/root/";
 	// private static String dbDir = "/Users/guidoleen/Robot-C12-A/src/kleur_en_geluid/";
 	public static String dbURL = "jdbc:derby:" + dbDirRobot + dbNaam; // + ";" // create=true"; 

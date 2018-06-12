@@ -1,6 +1,7 @@
 package kleur_en_geluid;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import basisoefeningen.ColorSensor;
@@ -33,7 +34,7 @@ import lejos.hardware.sensor.SensorMode;
 
 public class Kleur_En_Geluid_Launcher implements SensorConstants
 {
-	public static void main(String[] args) 
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException 
 	{
 		 kleurNaarGeluid();
 		// duurTijd();
@@ -42,7 +43,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 	}
 	
 	// KLeur naar geluid methode
-	private static void kleurNaarGeluid() 
+	private static void kleurNaarGeluid() throws InstantiationException, IllegalAccessException, ClassNotFoundException 
 	{
 		/////// Init vars //////
 		// Constants
@@ -52,9 +53,17 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		final int MOTOR_POWER = 20;
 		
 		// kleuren uit de db
-		// ArrayList<KleurNaarGeluid> kleurennoten = new KleurNaarGeluidDAO().selecAlleNotenUitDB();
-		ArrayList<KleurNaarGeluid> kleurennoten = new KleurNaarGeluidARR().getArrKleurennoten();
+		Lcd.print(1, "Laad database in array...");
+
+		ArrayList<KleurNaarGeluid> kleurennoten = new ArrayList<>();
+		KleurNaarGeluidDAO kleurennotenDAO = new KleurNaarGeluidDAO();
+		kleurennotenDAO.MakeConnection();
+		kleurennoten = kleurennotenDAO.selecAlleNotenUitDB();
+				
+		// ArrayList<KleurNaarGeluid> kleurennoten = new KleurNaarGeluidARR().getArrKleurennoten();
 		ArrayList<KleurNaarGeluid> muziekstuk = new ArrayList<>();
+		
+		Lcd.clear();
 
 		String kleur = "Grijs";
 		String kleurmeter;
@@ -63,7 +72,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		long startTijd = System.currentTimeMillis(); // Set begintijd
 		long stopTijd = 0;
 		TouchSensor touch = new TouchSensor();
-		ColorSensor color = new ColorSensor(SensorPort.S3);
+		ColorSensor color = new ColorSensor(SensorPort.S4);
 
 		final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
 		final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
@@ -166,7 +175,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 	// Test Calibratie
 	public static void calibrateTest()
 	{
-		ColorSensor color = new ColorSensor(SensorPort.S3);
+		ColorSensor color = new ColorSensor(SensorPort.S4);
 
 		// Calibrate sensor
 		float black;
@@ -200,7 +209,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 	// Test KLeur Sensor
 	public static void testKleurenSensor()
 	{
-		ColorSensor color = new ColorSensor(SensorPort.S3);
+		ColorSensor color = new ColorSensor(SensorPort.S4);
 		color.setColorIdMode();
 		color.setFloodLight(Color.WHITE);
 
