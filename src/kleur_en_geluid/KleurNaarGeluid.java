@@ -7,7 +7,7 @@ package kleur_en_geluid;
 
 public class KleurNaarGeluid // implements Sounds
 {
-	private final long XTRA_DURATION = 500;
+	private final long XTRA_DURATION = 400;
 	private String kleur;
 	private int frequentie;
 	private String nootcode;
