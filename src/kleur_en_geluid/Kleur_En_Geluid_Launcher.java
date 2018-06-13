@@ -53,7 +53,8 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		final int MOTOR_POWER = 30; // 20
 		
 		// kleuren uit de db laden
-		Lcd.print(1, "Laad database in array...");
+		Lcd.print(1, "Laad database,");
+		Lcd.print(2, "in array..." );
 
 		ArrayList<KleurNaarGeluid> kleurennoten = new ArrayList<>();
 		KleurNaarGeluidDAO kleurennotenDAO = new KleurNaarGeluidDAO();
@@ -121,16 +122,16 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 					}
 				}
 				// Speel noot 1 maal
-				Sound.playNote( Sound.PIANO, frequentie, STANDAARD_DUUR );
-				
-				// Show on screen...
-				Lcd.clear();
-				Lcd.print(1, "Kleur=%s", kleur );
-				Lcd.clear(2);
-				Lcd.print(2, "Druk op escape om te stoppen");
+				Sound.playNote( Sound.XYLOPHONE, frequentie, STANDAARD_DUUR );
 			}
 			// Get kleur van colorsensor
 			kleur = ColorSensor.colorName( color.getColorID() );
+			
+			// Show on screen...
+			Lcd.clear();
+			Lcd.print(1, "Kleur=%s", kleur );
+			Lcd.clear(2);
+			Lcd.print(2, "Druk op escape om te stoppen");
 
 			// Set stopwatch
 			startTijd = System.currentTimeMillis();
@@ -146,20 +147,14 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		Lcd.print(1, "Druk voor afspelen...");
 		Button.waitForAnyPress();
 
-		String strTotal = "";
 		for(int i = 1; i  < muziekstuk.size(); i++) 
 		{
 			Sound.setVolume( VOLUME_MID );
-			Sound.playNote( Sound.PIANO, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
-
-			strTotal += String.format("Kleur: %s Duur: %d \n", 
-					muziekstuk.get(i).getKleur(),
-					(int)muziekstuk.get(i).getDuur()
-					);
+			Sound.playNote( Sound.XYLOPHONE, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
 		}
 		
 		Lcd.clear();
-		Lcd.print(1, "Klaar." + strTotal);
+		Lcd.print(1, "Klaar.");
 		Button.waitForAnyPress();
 
 		// free up resources.
@@ -222,5 +217,18 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 				System.out.println("Kleur: " + kleur);
 		}
 		
+	}
+	
+	// Toon ArrayList op het scherm
+	public static void toonArrayList( ArrayList<KleurNaarGeluid> muziekstuk)
+	{
+		String strTotal = "";
+		for (int j = 0; j < muziekstuk.size(); j++) 
+		{
+			strTotal += String.format("Kleur: %s Duur: %d \n", 
+					muziekstuk.get(j).getKleur(),
+					(int)muziekstuk.get(j).getDuur()
+					);
+		}
 	}
 }
