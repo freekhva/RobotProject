@@ -123,7 +123,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		motorL.stop();
 		motorR.stop();
 
-		// Afspelen van de ArrayList
+		// Afspelen van de ArrayList.
 		Lcd.clear();
 		Lcd.print(1, "Druk voor afspelen...");
 		Button.waitForAnyPress();
