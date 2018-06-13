@@ -4,7 +4,7 @@ public class ParcourLauncher {
 	public static void main(String[] args) {
 		// 30, 30, 1, 0, 0 = smooth
 		// de KD? wat is het verschil
-		OneSensorPlus test1 = new OneSensorPlus(40, 40, 1f, 0f, 5f);
+		OneSensorPlus test1 = new OneSensorPlus(40, 40, 1.2f, 0f, 5f);
 //		OneSensor test1 = new OneSensor(40, 40, 1f, 0f, 5f);
 		
 		float one = test1.getKp();
