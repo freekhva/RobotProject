@@ -1,36 +1,18 @@
 package kleur_en_geluid;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import basisoefeningen.ColorSensor;
 import basisoefeningen.Lcd;
 import lejos.hardware.port.MotorPort;
-import lejos.hardware.port.Port;
-import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.SensorConstants;
 import lejos.robotics.Color;
-import lejos.robotics.ColorDetector;
-import lejos.robotics.ColorIdentifier;
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
-import lejos.robotics.Color;
 import lejos.utility.Delay;
-import muziek.*;
-import lejos.hardware.Brick;
-import lejos.hardware.BrickFinder;
-import lejos.hardware.lcd.Font;
-import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.UnregulatedMotor;
 import sensoren.*;
-import lejos.hardware.Button;
-import lejos.hardware.sensor.EV3TouchSensor;
-import lejos.hardware.sensor.SensorMode;
-
-
-
 
 public class Kleur_En_Geluid_Launcher implements SensorConstants
 {
@@ -67,7 +49,6 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		Lcd.clear();
 
 		String kleur = "Grijs";
-		String kleurmeter;
 		int frequentie = 0;
 		
 		long startTijd = System.currentTimeMillis(); // Set begintijd
