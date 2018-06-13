@@ -1,12 +1,12 @@
 package Parcour;
 
-import basisoefeningen.ColorSensor;
+import sensoren.ColorSensor;
 import lejos.hardware.Button;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 
-public class OneSensor {
+public class OneSensor implements Driveable {
 	// Initialize variables
 	int fullPower;
 	int noPower;
@@ -22,7 +22,7 @@ public class OneSensor {
 
 	// declare left and right sensor
 	// ambSensor is left sensor, ambSensorCor is right sensor
-	ColorSensor ambSensor = new ColorSensor(SensorPort.S3);
+	ColorSensor ambSensor = new ColorSensor(SensorPort.S4);
 
 	public OneSensor(int fullPower, int noPower, float kp, float ki, float kd) {
 		super();
@@ -31,6 +31,18 @@ public class OneSensor {
 		this.kp = kp;
 		this.ki = ki;
 		this.kd = kd;
+	}
+
+	public float getKp() {
+		return kp;
+	}
+
+	public float getKi() {
+		return ki;
+	}
+
+	public float getKd() {
+		return kd;
 	}
 
 	public void goCalibrate() {
@@ -73,7 +85,7 @@ public class OneSensor {
 		float derivative;
 
 		// Turn on sensors
-//		ambSensor.setRedMode();
+		// ambSensor.setRedMode();
 
 		// Print out message and wait for input
 		System.out.println("PRESS TO START");
@@ -82,14 +94,15 @@ public class OneSensor {
 		while (Button.ESCAPE.isUp()) {
 
 			ambient = ambSensor.getRed();
-			error = ambient - midpoint;
+			error = midpoint - ambient;
 
-			integral = integral + error;
+			integral *= 0.98; 
+			integral += error;
 			derivative = error - lasterror;
 
 			// calculate correction using the left sensor
 			correction = (kp * error) + (ki * integral) + (kd * derivative);
-			correction = (correction * 100);
+			correction = (correction * 100f);
 			lasterror = error;
 
 			// adjust motor speed
