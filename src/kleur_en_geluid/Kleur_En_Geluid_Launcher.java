@@ -50,7 +50,6 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 
 		String kleur = "Grijs";
 		int frequentie = 0;
-		
 		long startTijd = System.currentTimeMillis(); // Set begintijd
 		long stopTijd = 0;
 		TouchSensor touch = new TouchSensor();
@@ -127,11 +126,13 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		Lcd.clear();
 		Lcd.print(1, "Druk voor afspelen...");
 		Button.waitForAnyPress();
-
+		
+		Sound.setVolume( VOLUME_MID );
 		for(int i = 1; i  < muziekstuk.size(); i++) 
 		{
-			Sound.setVolume( VOLUME_MID );
 			Sound.playNote( Sound.XYLOPHONE, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
+			if( Button.RIGHT.isDown() )
+				break;
 		}
 		
 		Lcd.clear();
@@ -152,7 +153,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 	public static void calibrateTest()
 	{
 		ColorSensor color = new ColorSensor(SensorPort.S4);
-
+		
 		// Calibrate sensor
 		float black;
 		float white;
