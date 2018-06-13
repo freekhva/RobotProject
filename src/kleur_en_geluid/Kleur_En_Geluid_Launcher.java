@@ -123,6 +123,9 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 				}
 				// Speel noot 1 maal
 				Sound.playNote( Sound.XYLOPHONE, frequentie, STANDAARD_DUUR );
+				
+				// Set Starttijd opnieuw
+				startTijd = System.currentTimeMillis();
 			}
 			// Get kleur van colorsensor
 			kleur = ColorSensor.colorName( color.getColorID() );
@@ -132,9 +135,6 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 			Lcd.print(1, "Kleur=%s", kleur );
 			Lcd.clear(2);
 			Lcd.print(2, "Druk op escape om te stoppen");
-
-			// Set stopwatch
-			startTijd = System.currentTimeMillis();
 		}
 		while ( !touch.getTouchSensorAanUit() && Button.ESCAPE.isUp() ); //  || !touch.getTouchSensorAanUit() Button.ESCAPE.isUp())
 
