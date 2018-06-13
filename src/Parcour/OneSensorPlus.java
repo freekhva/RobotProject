@@ -5,8 +5,9 @@ import lejos.hardware.Button;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
+import lejos.utility.Delay;
 
-public class OneSensor implements Driveable {
+public class OneSensorPlus implements Driveable {
 	// Initialize variables
 	int fullPower;
 	int noPower;
@@ -15,6 +16,7 @@ public class OneSensor implements Driveable {
 	float kd;
 	float midpoint;
 	float midpoint2;
+//	int whiteamount = 0;
 
 	// declare left and right motor
 	final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
@@ -24,7 +26,7 @@ public class OneSensor implements Driveable {
 	// ambSensor is left sensor, ambSensorCor is right sensor
 	ColorSensor ambSensor = new ColorSensor(SensorPort.S4);
 
-	public OneSensor(int fullPower, int noPower, float kp, float ki, float kd) {
+	public OneSensorPlus(int fullPower, int noPower, float kp, float ki, float kd) {
 		super();
 		this.fullPower = fullPower;
 		this.noPower = noPower;
@@ -83,7 +85,8 @@ public class OneSensor implements Driveable {
 		float lasterror = 0;
 		float integral = 0;
 		float derivative;
-		int turntime;
+		int whiteamount = 0;
+		int turningpoint = 150;
 
 		// Turn on sensors
 		// ambSensor.setRedMode();
@@ -105,10 +108,44 @@ public class OneSensor implements Driveable {
 			correction = (kp * error) + (ki * integral) + (kd * derivative);
 			correction = (correction * 100f);
 			lasterror = error;
+			
+			if( ambient > midpoint ) {
+				whiteamount++;
+			} else if (ambient < midpoint ) {
+				whiteamount = 0;
+			}
+			
 
 			// adjust motor speed
 			int FullMotorSpeed = fullPower + (int) correction;
 			int NoMotorSpeed = noPower - (int) correction;
+			
+			// adjust motor speed
+			
+			System.out.println(whiteamount);
+	
+			if(whiteamount > turningpoint) {
+				motorL.setPower(20);
+				motorR.setPower(20);
+				Delay.msDelay(1000);
+				motorR.setPower(0);
+				motorL.setPower(0);
+				Delay.msDelay(500);
+				motorR.setPower(-50);
+				motorL.setPower(50);
+				Delay.msDelay(500);
+//				Delay.msDelay(1000);
+//				motorR.setPower(0);
+//				motorL.setPower(0);
+//				Delay.msDelay(500);
+//				motorL.setPower(100);
+//				motorR.setPower(100);
+//				Delay.msDelay(500);
+//				motorR.setPower(0);
+//				motorL.setPower(0);
+//				Delay.msDelay(100);
+				whiteamount = 0;
+			} 
 
 			// set motor speed bracket prevents robot going backwards
 			if (FullMotorSpeed < 0)
