@@ -15,7 +15,6 @@ public class OneSensorPlus implements Driveable {
 	float ki;
 	float kd;
 	float midpoint;
-	float midpoint2;
 //	int whiteamount = 0;
 
 	// declare left and right motor
@@ -99,6 +98,7 @@ public class OneSensorPlus implements Driveable {
 
 			ambient = ambSensor.getRed();
 			error = midpoint - ambient;
+			float midpoint2 = midpoint * 0.75f;
 
 			integral *= 0.98; 
 			integral += error;
@@ -111,7 +111,7 @@ public class OneSensorPlus implements Driveable {
 			
 			if( ambient > midpoint ) {
 				whiteamount++;
-			} else if (ambient < midpoint ) {
+			} else if (ambient < (midpoint2)) {
 				whiteamount = 0;
 			}
 			
@@ -124,16 +124,18 @@ public class OneSensorPlus implements Driveable {
 			
 			System.out.println(whiteamount);
 	
-			if(whiteamount > turningpoint) {
-				motorL.setPower(20);
-				motorR.setPower(20);
-				Delay.msDelay(1000);
+			while(whiteamount > turningpoint) {
+				motorL.setPower(0);
+				motorR.setPower(0);
+				Delay.msDelay(500);
+				motorR.setPower(50);
+				motorL.setPower(50);
+//				while();
+				Delay.msDelay(500);
 				motorR.setPower(0);
 				motorL.setPower(0);
 				Delay.msDelay(500);
-				motorR.setPower(-50);
-				motorL.setPower(50);
-				Delay.msDelay(500);
+			
 //				Delay.msDelay(1000);
 //				motorR.setPower(0);
 //				motorL.setPower(0);
