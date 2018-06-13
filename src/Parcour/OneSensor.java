@@ -83,6 +83,7 @@ public class OneSensor implements Driveable {
 		float lasterror = 0;
 		float integral = 0;
 		float derivative;
+		int turntime;
 
 		// Turn on sensors
 		// ambSensor.setRedMode();
