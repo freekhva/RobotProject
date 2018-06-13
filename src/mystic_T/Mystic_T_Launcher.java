@@ -27,29 +27,29 @@ public class Mystic_T_Launcher {
 
 		ArrayList<Kaart> kaarten = new ArrayList<>();
 		ArrayList<Kaart> tarotkaarten = new ArrayList<Kaart>();
-		tarotkaarten.add(new Kaart(2,"Klaverbladen",61,70,59,0,1));
-		tarotkaarten.add(new Kaart(3,"Schip",66,78,57,1,2));
-		tarotkaarten.add(new Kaart(4,"Huis",63,62,40,0,2));
-		tarotkaarten.add(new Kaart(6,"Wolken",49,50,27,0,1));
-		tarotkaarten.add(new Kaart(7,"Slang",74,84,62,2,1));
-		tarotkaarten.add(new Kaart(10,"Zeisen",53,58,39,0,1));
-		tarotkaarten.add(new Kaart(12,"Vogels",46,56,24,0,0));
-		tarotkaarten.add(new Kaart(11,"Roede",60,62,50,0,1));
-		tarotkaarten.add(new Kaart(14,"Vosje",51,57,23,2,1));
-		tarotkaarten.add(new Kaart(15,"Beer",33,41,20,0,2));
-		tarotkaarten.add(new Kaart(16,"Ster",48,81,62,0,2));
-		tarotkaarten.add(new Kaart(17,"Ooievaar",39,56,25,0,0));
-		tarotkaarten.add(new Kaart(18,"Hond",55,61,37,2,2));
-		tarotkaarten.add(new Kaart(19,"Toren",52,49,35,0,1));
-		tarotkaarten.add(new Kaart(21,"Berg",45,46,21,0,1));
-		tarotkaarten.add(new Kaart(23,"Muizen",41,46,23,1,2));
-		tarotkaarten.add(new Kaart(25,"Ring",49,43,45,2,0));
-		tarotkaarten.add(new Kaart(27, "Brief",82,83,55,0,2));
-		tarotkaarten.add(new Kaart(28,"Heer",48,40,17,0,0));
-		tarotkaarten.add(new Kaart(30, "Lelie",70,78,58,3,2));
-		tarotkaarten.add(new Kaart(31,"Zonne",77,70,32,0,2));
-		tarotkaarten.add(new Kaart(34,"Vissen",63,73,49,0,2));
-		tarotkaarten.add(new Kaart(36,"Kruis",74,95,727,0,1));
+		tarotkaarten.add(new Kaart(2,"Klaverbladen",61,0,1));
+		tarotkaarten.add(new Kaart(3,"Schip",66,1,2));
+		tarotkaarten.add(new Kaart(4,"Huis",63,0,2));
+		tarotkaarten.add(new Kaart(6,"Wolken",49,0,1));
+		tarotkaarten.add(new Kaart(7,"Slang",74,2,1));
+		tarotkaarten.add(new Kaart(10,"Zeisen",53,0,1));
+		tarotkaarten.add(new Kaart(12,"Vogels",46,0,0));
+		tarotkaarten.add(new Kaart(11,"Roede",60,0,1));
+		tarotkaarten.add(new Kaart(14,"Vosje",51,2,1));
+		tarotkaarten.add(new Kaart(15,"Beer",33,0,2));
+		tarotkaarten.add(new Kaart(16,"Ster",48,0,2));
+		tarotkaarten.add(new Kaart(17,"Ooievaar",39,0,0));
+		tarotkaarten.add(new Kaart(18,"Hond",55,2,2));
+		tarotkaarten.add(new Kaart(19,"Toren",52,0,1));
+		tarotkaarten.add(new Kaart(21,"Berg",45,0,1));
+		tarotkaarten.add(new Kaart(23,"Muizen",41,1,2));
+		tarotkaarten.add(new Kaart(25,"Ring",49,2,0));
+		tarotkaarten.add(new Kaart(27, "Brief",82,0,2));
+		tarotkaarten.add(new Kaart(28,"Heer",48,0,0));
+		tarotkaarten.add(new Kaart(30, "Lelie",70,3,2));
+		tarotkaarten.add(new Kaart(31,"Zonne",77,0,2));
+		tarotkaarten.add(new Kaart(34,"Vissen",63,0,2));
+		tarotkaarten.add(new Kaart(36,"Kruis",74,0,1));
 
 		System.out.println("Mystic T");
 		Lcd.print(2, "Druk een knop");
@@ -62,8 +62,8 @@ public class Mystic_T_Launcher {
 
 		// Instellen juiste sensor
 
-		color.setRGBMode();
-		color.setFloodLight(Color.WHITE);
+		color.setRedMode();
+		color.setFloodLight(Color.RED);
 
 		Color rgb;
 
@@ -78,15 +78,14 @@ public class Mystic_T_Launcher {
 
 			Lcd.clear(5);
 			Lcd.clear(6);
-			Lcd.print(4, "r=%d g=%d b=%d", rgb.getRed(), rgb.getGreen(), rgb.getBlue());
+			Lcd.print(4, "r=%d", rgb.getRed());
 			rood = rgb.getRed();
 			groen = rgb.getGreen();
 			blauw = rgb.getBlue();
 
 			// checken of de kaart in de tarotarray voorkomt
 			for (Kaart kaart : tarotkaarten) {
-				if (kaart.testKleur(rood, kaart.getRood()) && kaart.testKleur(blauw, kaart.getBlauw())
-						&& kaart.testKleur(groen, kaart.getGroen())) {
+				if (kaart.testKleur(rood, kaart.getRood())) {
 					if (kaarten.size() > 0) {
 						if (checkDubbel(kaart, kaarten)) {
 							Lcd.print(5, "%s is dubbel", kaart.getNaamKaart());
@@ -110,17 +109,6 @@ public class Mystic_T_Launcher {
 						Lcd.print(6, "Scan volgende kaart");
 						Button.waitForAnyPress();
 					}
-					// Dit is niet meer nodig, maar laat maar even staan.
-					// } else if (kaart.testKleur(groen, kaart.getGroen()) && kaart.testKleur(rood,
-					// kaart.getRood())) {
-					// Lcd.clear(5);
-					// Lcd.print(5, "Dit is de %s", kaart.getNaamKaart());
-					// Sound.beep();
-					// kaarten.add(kaart));
-					// if (kaarten.size() < INPUT) {
-					// Lcd.print(6, "Scan volgende kaart");
-					// Button.waitForAnyPress();
-					// }
 				}
 			}
 		} while (kaarten.size() < INPUT);

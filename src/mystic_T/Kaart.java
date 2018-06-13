@@ -5,19 +5,15 @@ public class Kaart {
 	int nummer;
 	String naamKaart;
 	int rood;
-	int blauw;
-	int groen;
 	int onderwerp;
 	int type;
 	
 	//constructor
-	public Kaart(int nummer, String naamKaart, int rood, int groen, int blauw, int onderwerp, int type) {
+	public Kaart(int nummer, String naamKaart, int rood, int onderwerp, int type) {
 		super();
 		this.nummer = nummer;
 		this.naamKaart = naamKaart;
 		this.rood = rood;
-		this.blauw = blauw;
-		this.groen = groen;
 		this.onderwerp = onderwerp;
 		this.type = type;
 	}
@@ -28,14 +24,6 @@ public class Kaart {
 
 	public int getRood() {
 		return rood;
-	}
-
-	public int getBlauw() {
-		return blauw;
-	}
-
-	public int getGroen() {
-		return groen;
 	}
 	
 	public int getOnderwerp() {

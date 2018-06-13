@@ -1,20 +1,25 @@
 package mystic_T;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Voorspelling2 {
 
 	int onderwerp;
 	int type;
 	ArrayList<Kaart> kaarten;
-	final int SLANGKAART = 7;
-	final int BEERKAART = 15;
-	final int ROEDEKAART = 11;
-	final int WOLKKAART = 6;
-	final int RINGKAART = 25;
-	final int HEERKAART = 28;
-	final int[] WOLKNEGATIEF = new int[] { 2, 16, 18, 30, 27 };
+	final static int WERK = 1;
+	final static int LIEFDE = 2;
+	final static int GEZONDHEID = 3;
+	final static int LEVEN = 4;
+	final static int POSITIEF = 2;
+	final static int NEGATIEF = 1;
+	final static int SLANGKAART = 7;
+	final static int BEERKAART = 15;
+	final static int ROEDEKAART = 11;
+	final static int WOLKKAART = 6;
+	final static int RINGKAART = 25;
+	final static int HEERKAART = 28;
+	final static int[] WOLKNEGATIEF = new int[] { 2, 16, 18, 30, 27 };
 
 	// constructor
 	public Voorspelling2(ArrayList<Kaart> kaarten) {
@@ -48,49 +53,49 @@ public class Voorspelling2 {
 
 	public void audioVoorspellingBasis() {
 
-		if (getOnderwerp() == 1) {
+		if (getOnderwerp() == WERK) {
 			// speel af geluid werk
 
-		} else if (getOnderwerp() == 2) {
+		} else if (getOnderwerp() == LIEFDE) {
 			// speel af geluid liefde
 
-		} else if (getOnderwerp() == 3) {
+		} else if (getOnderwerp() == GEZONDHEID) {
 			// speel af geluid gezondheid
 
-		} else {
+		} else  if (getOnderwerp() == LEVEN ){
 			// speel af geluid leven
 
 		}
-		if (getType() == 2) {
+		if (getType() == POSITIEF) {
 			// speel af positief
 
-		} else {
+		} else  if (getType() == NEGATIEF){
 			// speel af negatief
 
 		}
 	}
 
 	public void audioVoorspellingRest() {
-		if (getType() == 2) {
+		if (getType() == POSITIEF) {
 			switch (getOnderwerp()) {
-			case 1: // speel af ((int)Math.random()*werkpositiefnarray.length-1))
+			case WERK: // speel af ((int)Math.random()*werkpositiefnarray.length-1))
 				break;
-			case 2: // speel af ((int)Math.random()*liefdepositiefnarray.length-1))
+			case LIEFDE: // speel af ((int)Math.random()*liefdepositiefnarray.length-1))
 				break;
-			case 3: // speel af ((int)Math.random()*gezondheidpositiefnarray.length-1))
+			case GEZONDHEID: // speel af ((int)Math.random()*gezondheidpositiefnarray.length-1))
 				break;
-			case 4: // speel af ((int)Math.random()*levenpositiefnarray.length-1))
+			case LEVEN: // speel af ((int)Math.random()*levenpositiefnarray.length-1))
 				break;
 			}
-		} else if (getType() == 1) {
+		} else if (getType() == NEGATIEF) {
 			switch (getOnderwerp()) {
-			case 1: // speel af ((int)Math.random()*werknegatiefnarray.length-1))
+			case WERK: // speel af ((int)Math.random()*werknegatiefnarray.length-1))
 				break;
-			case 2: // speel af ((int)Math.random()*liefdenegatiefnarray.length-1))
+			case LIEFDE: // speel af ((int)Math.random()*liefdenegatiefnarray.length-1))
 				break;
-			case 3: // speel af ((int)Math.random()*gezondheidnegatiefnarray.length-1))
+			case GEZONDHEID: // speel af ((int)Math.random()*gezondheidnegatiefnarray.length-1))
 				break;
-			case 4: // speel af ((int)Math.random()*levennegatiefnarray.length-1))
+			case LEVEN: // speel af ((int)Math.random()*levennegatiefnarray.length-1))
 				break;
 			}
 		}
@@ -182,16 +187,16 @@ public class Voorspelling2 {
 		int positief = 0;
 		int negatief = 0;
 		for (Kaart kaart : kaarten) {
-			if (kaart.getType() == 2) {
+			if (kaart.getType() == POSITIEF) {
 				positief++;
-			} else if (kaart.getType() == 1) {
+			} else if (kaart.getType() == NEGATIEF) {
 				negatief++;
 			}
 		}
 		if (positief > negatief) {
-			return 2;
+			return POSITIEF;
 		} else if (negatief > positief) {
-			return 1;
+			return NEGATIEF;
 		} else {
 
 			return ((int) (Math.random() * 2) + 1);
