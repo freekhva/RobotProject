@@ -33,6 +33,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		final int VOLUME_MID = 50;
 		final int STANDAARD_DUUR = 200;
 		final int MOTOR_POWER = 30; // 20
+		final int FREQ_CORRECTIE = 100;
 		
 		// kleuren uit de db laden
 		Lcd.print(1, "Laad database,");
@@ -130,7 +131,7 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		Sound.setVolume( VOLUME_MID );
 		for(int i = 1; i  < muziekstuk.size(); i++) 
 		{
-			Sound.playNote( Sound.XYLOPHONE, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
+			Sound.playNote( Sound.XYLOPHONE, ( muziekstuk.get(i).getFrequentie() - FREQ_CORRECTIE ), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
 			if( Button.RIGHT.isDown() )
 				break;
 		}

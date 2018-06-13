@@ -57,7 +57,8 @@ public class KleurNaarGeluidDAO
 						rs.getInt("frequentie")
 						) );
 			}
-
+			rs.close();
+			this.conn.close();
 		} 
 		catch (SQLException e) 
 		{
