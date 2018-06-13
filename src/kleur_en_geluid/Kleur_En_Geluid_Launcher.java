@@ -147,16 +147,10 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 		Lcd.print(1, "Druk voor afspelen...");
 		Button.waitForAnyPress();
 
-		String strTotal = "";
 		for(int i = 1; i  < muziekstuk.size(); i++) 
 		{
 			Sound.setVolume( VOLUME_MID );
 			Sound.playNote( Sound.XYLOPHONE, muziekstuk.get(i).getFrequentie(), (int)muziekstuk.get(i).getDuurMetExtraDuration() ); // (int)muziekstuk.get(i).getDuur()
-
-//			strTotal += String.format("Kleur: %s Duur: %d \n", 
-//					muziekstuk.get(i).getKleur(),
-//					(int)muziekstuk.get(i).getDuur()
-//					);
 		}
 		
 		Lcd.clear();
@@ -223,5 +217,18 @@ public class Kleur_En_Geluid_Launcher implements SensorConstants
 				System.out.println("Kleur: " + kleur);
 		}
 		
+	}
+	
+	// Toon ArrayList op het scherm
+	public static void toonArrayList( ArrayList<KleurNaarGeluid> muziekstuk)
+	{
+		String strTotal = "";
+		for (int j = 0; j < muziekstuk.size(); j++) 
+		{
+			strTotal += String.format("Kleur: %s Duur: %d \n", 
+					muziekstuk.get(j).getKleur(),
+					(int)muziekstuk.get(j).getDuur()
+					);
+		}
 	}
 }
