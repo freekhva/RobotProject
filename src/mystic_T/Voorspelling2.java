@@ -19,7 +19,7 @@ public class Voorspelling2 {
 	final static int WOLKKAART = 6;
 	final static int RINGKAART = 25;
 	final static int HEERKAART = 28;
-	final static int[] WOLKNEGATIEF = new int[] { 2, 16, 18, 30, 27 };
+	final static int[] WOLKNEGATIEF = new int[] { 2, 22, 18, 27 };
 
 	// constructor
 	public Voorspelling2(ArrayList<Kaart> kaarten) {
@@ -33,11 +33,11 @@ public class Voorspelling2 {
 	public String toString() {
 		String onderwerpVoorspelling = "Bla ";
 		String polariteit = "Bliep ";
-		if (getOnderwerp() == 1) {
+		if (getOnderwerp() == WERK) {
 			onderwerpVoorspelling = "Werk ";
-		} else if (getOnderwerp() == 2) {
+		} else if (getOnderwerp() == LIEFDE) {
 			onderwerpVoorspelling = "Liefde ";
-		} else if (getOnderwerp() == 3) {
+		} else if (getOnderwerp() == GEZONDHEID) {
 			onderwerpVoorspelling = "Gezondheid ";
 		} else {
 			onderwerpVoorspelling = "Leven ";
@@ -101,7 +101,7 @@ public class Voorspelling2 {
 		}
 		if (kaartAanwezig(BEERKAART) == true) {
 			// speel geluid jaloezie af Gollem?
-		} else if ((wolkGevoelig() == true && kaartAanwezig(WOLKKAART) == true && sumType() <4)) {
+		} else if ((wolkGevoelig() == true && kaartAanwezig(WOLKKAART) == true)) {
 			// speel geluid wolken af
 		} else if (kaartAanwezig(HEERKAART) == true) {
 			// speel geluid stranger af
@@ -117,10 +117,6 @@ public class Voorspelling2 {
 		return type;
 	}
 
-	public ArrayList<Kaart> getKaarten() {
-		return kaarten;
-	}
-
 	public int kiesOnderwerp() {
 		if (kaarten.get(0).getOnderwerp() != 0) {
 			return kaarten.get(0).getOnderwerp();
@@ -133,17 +129,16 @@ public class Voorspelling2 {
 			return ((int) (Math.random() * 4));
 		}
 	}
-
+	// bepalen type afhankelijk van de gekozen kaarten
 	public int kiesType() {
 		if (kaartAanwezig(BEERKAART) == true) {
 			return 2;
-		} else if (kaartAanwezig(SLANGKAART) == true || kaartAanwezig(ROEDEKAART) == true) { // super negatieve kaarten
+		} else if (kaartAanwezig(SLANGKAART) == true || kaartAanwezig(ROEDEKAART) == true) {
 			return 1;
-		} else if (wolkGevoelig() == true && kaartAanwezig(WOLKKAART) == true) { // Kijken of de wolkkaart aanwezig is
-																					// en er wolkgevoelige kaarten
+		} else if (wolkGevoelig() == true && kaartAanwezig(WOLKKAART) == true) {																	// en er wolkgevoelige kaarten
 			return 2;
-		} else if (kaartAanwezig(RINGKAART) == true && kaarten.get(0).getNummer() == RINGKAART) { // ringkaart
-																									// implementeren
+		} else if (kaartAanwezig(RINGKAART) == true && kaarten.get(0).getNummer() == RINGKAART) { 
+																									
 			return 1;
 		} else if (kaartAanwezig(RINGKAART) == true && kaarten.get(2).getNummer() == RINGKAART) {
 			return 2;
@@ -163,20 +158,12 @@ public class Voorspelling2 {
 		return aanwezig;
 	}
 
-	public int sumType() {
-		int sum = 0;
-		for (Kaart kaart : kaarten) {
-			sum = sum + kaart.getType();
-		}
-		return sum;
-	}
-
 	public boolean wolkGevoelig() {
 		boolean gevoelig = false;
 		for (Kaart kaart : kaarten) {
 			if (kaart.getNummer() == WOLKNEGATIEF[0] || kaart.getNummer() == WOLKNEGATIEF[1]
 					|| kaart.getNummer() == WOLKNEGATIEF[2] || kaart.getNummer() == WOLKNEGATIEF[3]
-					|| kaart.getNummer() == WOLKNEGATIEF[4]) {
+					) {
 				gevoelig = true;
 			}
 		}

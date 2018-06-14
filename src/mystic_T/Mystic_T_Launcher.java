@@ -1,18 +1,15 @@
 package mystic_T; // hier zit een rare error
 
 import sensoren.*;
-import basisoefeningen.ColorSensor;
-import basisoefeningen.Lcd;
+//import basisoefeningen.ColorSensor;
+//import basisoefeningen.Lcd;
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.Color;
 import lejos.utility.Delay;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import mystic_T.*; // freek toegevoegd, omdat anders Kaart niet meer herkend werd
+//import mystic_T.*; // freek toegevoegd, omdat anders Kaart niet meer herkend werd
 
 public class Mystic_T_Launcher {
 
@@ -21,8 +18,6 @@ public class Mystic_T_Launcher {
 		ColorSensor color = new ColorSensor(SensorPort.S1);
 		// aanmaken variabelen en arraylists
 		int rood;
-		int blauw;
-		int groen;
 		final int INPUT = 3;
 
 		ArrayList<Kaart> kaarten = new ArrayList<>();
@@ -80,8 +75,6 @@ public class Mystic_T_Launcher {
 			Lcd.clear(6);
 			Lcd.print(4, "r=%d", rgb.getRed());
 			rood = rgb.getRed();
-			groen = rgb.getGreen();
-			blauw = rgb.getBlue();
 
 			// checken of de kaart in de tarotarray voorkomt
 			for (Kaart kaart : tarotkaarten) {
