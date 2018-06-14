@@ -132,16 +132,15 @@ public class Voorspelling2 {
 	// bepalen type afhankelijk van de gekozen kaarten
 	public int kiesType() {
 		if (kaartAanwezig(BEERKAART) == true) {
-			return 2;
+			return POSITIEF;
 		} else if (kaartAanwezig(SLANGKAART) == true || kaartAanwezig(ROEDEKAART) == true) {
-			return 1;
+			return NEGATIEF;
 		} else if (wolkGevoelig() == true && kaartAanwezig(WOLKKAART) == true) {																	// en er wolkgevoelige kaarten
-			return 2;
-		} else if (kaartAanwezig(RINGKAART) == true && kaarten.get(0).getNummer() == RINGKAART) { 
-																									
-			return 1;
+			return POSITIEF;
+		} else if (kaartAanwezig(RINGKAART) == true && kaarten.get(0).getNummer() == RINGKAART) { 																					
+			return NEGATIEF;
 		} else if (kaartAanwezig(RINGKAART) == true && kaarten.get(2).getNummer() == RINGKAART) {
-			return 2;
+			return POSITIEF;
 		} else {
 
 			return bepaalType();
