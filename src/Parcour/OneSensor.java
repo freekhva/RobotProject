@@ -72,7 +72,8 @@ public class OneSensor implements Driveable {
 		midpoint = (white - black) / 2 + black;
 	}
 
-	public void goDrive() {
+	public void goDriveRight() {
+
 		// this method is only correct for a right turning track
 		// on the outside line
 
@@ -97,7 +98,7 @@ public class OneSensor implements Driveable {
 			ambient = ambSensor.getRed();
 			error = midpoint - ambient;
 
-			integral *= 0.98; 
+			integral *= 0.98;
 			integral += error;
 			derivative = error - lasterror;
 
@@ -118,6 +119,118 @@ public class OneSensor implements Driveable {
 
 			motorR.setPower(NoMotorSpeed);
 			motorL.setPower(FullMotorSpeed);
+		}
+	}
+
+	public void goMotorRight(int fullPower, int noPower, float correction) {
+		int FullMotorSpeed = fullPower + (int) correction;
+		int NoMotorSpeed = noPower - (int) correction;
+		if (FullMotorSpeed < 0)
+			FullMotorSpeed = 0;
+		if (NoMotorSpeed < 0)
+			NoMotorSpeed = 0;
+
+		motorR.setPower(NoMotorSpeed);
+		motorL.setPower(FullMotorSpeed);
+	}
+
+	public void goMotorLeft(int fullPower, int noPower, float correction) {
+		int FullMotorSpeed = fullPower + (int) correction;
+		int NoMotorSpeed = noPower - (int) correction;
+		if (FullMotorSpeed < 0)
+			FullMotorSpeed = 0;
+		if (NoMotorSpeed < 0)
+			NoMotorSpeed = 0;
+
+		motorL.setPower(NoMotorSpeed);
+		motorR.setPower(FullMotorSpeed);
+	}
+	
+	
+	public void goDrive(String modus) {
+		float lasterror = 0;
+
+		goCalibrate();
+
+		while (Button.ESCAPE.isUp()) {
+			float correction = calculateCorrection(lasterror);
+
+			if (modus == "right") {
+				goMotorRight(fullPower, noPower, correction);
+			} else if (modus == "left") {
+				goMotorLeft(fullPower, noPower, correction);
+			}
+		}
+	}
+
+	public float calculateCorrection(float lasterror) {
+		float ambient;
+		float correction;
+		float error = 0;
+		float integral = 0;
+		float derivative;
+
+		integral *= 0.98;
+		integral += error;
+		derivative = error - lasterror;
+
+		ambient = ambSensor.getRed();
+		error = midpoint - ambient;
+
+		correction = (kp * error) + (ki * integral) + (kd * derivative);
+		correction = (correction * 100f);
+		lasterror = error;
+
+		return correction;
+	}
+	
+	public void goDriveLeft() {
+
+		// this method is only correct for a right turning track
+		// on the outside line
+
+		// Initialize variables used only in this variable
+		float ambient;
+		float correction;
+		float error = 0;
+		float lasterror = 0;
+		float integral = 0;
+		float derivative;
+		int turntime;
+
+		// Turn on sensors
+		// ambSensor.setRedMode();
+
+		// Print out message and wait for input
+		System.out.println("PRESS TO START");
+		Button.waitForAnyPress();
+
+		while (Button.ESCAPE.isUp()) {
+
+			ambient = ambSensor.getRed();
+			error = midpoint - ambient;
+
+			integral *= 0.98;
+			integral += error;
+			derivative = error - lasterror;
+
+			// calculate correction using the left sensor
+			correction = (kp * error) + (ki * integral) + (kd * derivative);
+			correction = (correction * 100f);
+			lasterror = error;
+
+			// adjust motor speed
+			int FullMotorSpeed = fullPower + (int) correction;
+			int NoMotorSpeed = noPower - (int) correction;
+
+			// set motor speed bracket prevents robot going backwards
+			if (FullMotorSpeed < 0)
+				FullMotorSpeed = 0;
+			if (NoMotorSpeed < 0)
+				NoMotorSpeed = 0;
+
+			motorL.setPower(NoMotorSpeed);
+			motorR.setPower(FullMotorSpeed);
 		}
 	}
 }

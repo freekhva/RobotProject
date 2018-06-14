@@ -8,6 +8,8 @@ import lejos.hardware.port.SensorPort;
 import lejos.utility.Delay;
 
 public class TwoSensor implements Driveable {
+	
+	
 	// Initialize variables
 	int fullPower;
 	int noPower;
@@ -154,5 +156,22 @@ public class TwoSensor implements Driveable {
 				motorR.setPower(NoMotorSpeed);
 			}
 		}
+	}
+
+	@Override
+	public void goDrive(String modus) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void goDriveRight() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void goDriveLeft() {
+		// TODO Auto-generated method stub
+		
 	}
 }
