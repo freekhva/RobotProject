@@ -37,7 +37,7 @@ public class KleurNaarGeluidDAO
 		}
 	}
 	
-	// Select alle uit de db en stop ze in een arrayList....
+	// Select alle uit de db en stop ze in een arrayList...
 	public ArrayList<KleurNaarGeluid> selecAlleNotenUitDB()
 	{
 		ArrayList<KleurNaarGeluid> kleurenNoten = new ArrayList<>();
@@ -57,7 +57,8 @@ public class KleurNaarGeluidDAO
 						rs.getInt("frequentie")
 						) );
 			}
-
+			rs.close();
+			this.conn.close();
 		} 
 		catch (SQLException e) 
 		{

@@ -1,6 +1,6 @@
 package Parcour;
 
-import basisoefeningen.ColorSensor;
+import sensoren.ColorSensor;
 import lejos.hardware.Button;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
