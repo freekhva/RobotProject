@@ -26,8 +26,7 @@ public class OneSensorPlus implements Driveable {
 	final UnregulatedMotor motorL = new UnregulatedMotor(MotorPort.B);
 	final UnregulatedMotor motorR = new UnregulatedMotor(MotorPort.C);
 
-	// declare left and right sensor
-	// ambSensor is left sensor, ambSensorCor is right sensor
+	// declare sensor
 	ColorSensor ambSensor = new ColorSensor(SensorPort.S4);
 
 	public OneSensorPlus(int fullPower, int noPower, float kp, float ki, float kd) {
@@ -38,19 +37,8 @@ public class OneSensorPlus implements Driveable {
 		this.ki = ki;
 		this.kd = kd;
 	}
-
-	public float getKp() {
-		return kp;
-	}
-
-	public float getKi() {
-		return ki;
-	}
-
-	public float getKd() {
-		return kd;
-	}
-
+	
+	// calibration
 	public void goCalibrate() {
 		// This method calibrates the sensors and defines a calibrated midpoint
 
@@ -78,31 +66,8 @@ public class OneSensorPlus implements Driveable {
 		midpoint = (white - black) / 2 + black;
 		midpoint2 = midpoint * ADJUST;
 	}
-
-	public void goMotorRight(int fullPower, int noPower, float correction) {
-		int FullMotorSpeed = fullPower + (int) correction;
-		int NoMotorSpeed = noPower - (int) correction;
-		if (FullMotorSpeed < 0)
-			FullMotorSpeed = 0;
-		if (NoMotorSpeed < 0)
-			NoMotorSpeed = 0;
-
-		motorR.setPower(NoMotorSpeed);
-		motorL.setPower(FullMotorSpeed);
-	}
-
-	public void goMotorLeft(int fullPower, int noPower, float correction) {
-		int FullMotorSpeed = fullPower + (int) correction;
-		int NoMotorSpeed = noPower - (int) correction;
-		if (FullMotorSpeed < 0)
-			FullMotorSpeed = 0;
-		if (NoMotorSpeed < 0)
-			NoMotorSpeed = 0;
-
-		motorL.setPower(NoMotorSpeed);
-		motorR.setPower(FullMotorSpeed);
-	}
-
+	
+	// correction
 	public float calculateCorrection(float lasterror) {
 		float error = 0;
 		float integral = 0;
@@ -121,24 +86,59 @@ public class OneSensorPlus implements Driveable {
 
 		return correction;
 	}
+	
+	// go motor
+	public void goMotor(int fullPower, int noPower, float correction, String modus) {
+		// adjust motor power with correction
+		int FullMotorSpeed = fullPower + (int) correction;
+		int NoMotorSpeed = noPower - (int) correction;
 
+		// create boundaries for motors
+		if (FullMotorSpeed < 0)
+			FullMotorSpeed = 0;
+		if (NoMotorSpeed < 0)
+			NoMotorSpeed = 0;
+
+		// start motors
+		if (modus == "right") {
+			motorR.setPower(NoMotorSpeed);
+			motorL.setPower(FullMotorSpeed);
+		} else if (modus == "left") {
+			motorL.setPower(NoMotorSpeed);
+			motorR.setPower(FullMotorSpeed);
+		}
+	}
+	
+	// method in order to count white space 
+	public void goSkipWhite() {
+
+		if (ambient > midpoint) {
+			whiteamount++;
+		} else if (ambient < (midpoint2)) {
+			whiteamount = 0;
+		}
+
+		while (whiteamount > TURNING_POINT) {
+			motorR.setPower(50);
+			motorL.setPower(50);
+			Delay.msDelay(200);
+			whiteamount = 0;
+		}
+	}
+	
 	public void goDrive(String modus) {
 		float lasterror = 0;
 
 		goCalibrate();
 
 		while (Button.ESCAPE.isUp()) {
-			if (modus == "right") {
-				float correction = calculateCorrection(lasterror);
-				goSkipWhite();
-				goMotorRight(fullPower, noPower, correction);
-			} else if (modus == "left") {
-				float correction = calculateCorrection(lasterror);
-				goSkipWhite();
-				goMotorLeft(fullPower, noPower, correction);
-			}
+			float correction = calculateCorrection(lasterror);
+			goSkipWhite();
+			goMotor(fullPower, noPower, correction, modus);
 		}
 	}
+
+	// these methods are used for a broken menu
 
 	public void goDriveRight() {
 		// this method is only correct for a right turning track
@@ -194,29 +194,6 @@ public class OneSensorPlus implements Driveable {
 				motorR.setPower(50);
 				motorL.setPower(50);
 				Delay.msDelay(200);
-
-				// turn mode
-				// motorL.setPower(0);
-				// motorR.setPower(0);
-				// Delay.msDelay(500);
-				// motorR.setPower(50);
-				// motorL.setPower(50);
-				//// while();
-				// Delay.msDelay(500);
-				// motorR.setPower(0);
-				// motorL.setPower(0);
-				// Delay.msDelay(500);
-				//
-				// Delay.msDelay(1000);
-				// motorR.setPower(0);
-				// motorL.setPower(0);
-				// Delay.msDelay(500);
-				// motorL.setPower(100);
-				// motorR.setPower(100);
-				// Delay.msDelay(500);
-				// motorR.setPower(0);
-				// motorL.setPower(0);
-				// Delay.msDelay(100);
 				whiteamount = 0;
 			}
 
@@ -231,25 +208,8 @@ public class OneSensorPlus implements Driveable {
 		}
 	}
 
-	public void goSkipWhite() {
-		
-		if (ambient > midpoint) {
-			whiteamount++;
-		} else if (ambient < (midpoint2)) {
-			whiteamount = 0;
-		}
-
-		while (whiteamount > TURNING_POINT) {
-			motorR.setPower(50);
-			motorL.setPower(50);
-			Delay.msDelay(200);
-			whiteamount = 0;
-		}
-	}
-	
-
 	public void goDriveLeft() {
-		// this method is only correct for a right turning track
+		// this method is only correct for a left turning track
 		// on the outside line
 
 		// Initialize variables used only in this variable
@@ -302,29 +262,6 @@ public class OneSensorPlus implements Driveable {
 				motorR.setPower(50);
 				motorL.setPower(50);
 				Delay.msDelay(200);
-
-				// turn mode
-				// motorL.setPower(0);
-				// motorR.setPower(0);
-				// Delay.msDelay(500);
-				// motorR.setPower(50);
-				// motorL.setPower(50);
-				//// while();
-				// Delay.msDelay(500);
-				// motorR.setPower(0);
-				// motorL.setPower(0);
-				// Delay.msDelay(500);
-				//
-				// Delay.msDelay(1000);
-				// motorR.setPower(0);
-				// motorL.setPower(0);
-				// Delay.msDelay(500);
-				// motorL.setPower(100);
-				// motorR.setPower(100);
-				// Delay.msDelay(500);
-				// motorR.setPower(0);
-				// motorL.setPower(0);
-				// Delay.msDelay(100);
 				whiteamount = 0;
 			}
 
