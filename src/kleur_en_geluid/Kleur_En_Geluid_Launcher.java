@@ -2,8 +2,6 @@ package kleur_en_geluid;
 
 import java.util.ArrayList;
 
-import basisoefeningen.ColorSensor;
-import basisoefeningen.Lcd;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.sensor.SensorConstants;
 import lejos.robotics.Color;
