@@ -1,11 +1,5 @@
 package kleur_en_geluid;
 
-<<<<<<< HEAD
-=======
-import java.util.ArrayList;
-
-import lejos.hardware.port.MotorPort;
->>>>>>> branch 'master' of git@gitlab.fdmci.hva.nl:MIW-RobotProject-C12/Robot-C12-A.git
 import lejos.hardware.sensor.SensorConstants;
 
 public class Kleur_En_Geluid_Launcher implements SensorConstants
