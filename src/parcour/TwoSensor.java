@@ -1,4 +1,4 @@
-package Parcour;
+package parcour;
 
 import sensoren.ColorSensor;
 import lejos.hardware.Button;

@@ -1,12 +1,12 @@
-package Parcour;
+package parcour;
 
 import lejos.hardware.Button;
 
-public class RightParcour {
+public class WhiteRight {
 	public static void main(String[] args) {
-		System.out.println("Drive Right");
+		System.out.println("Drive Right + White Skip");
 		Button.waitForAnyPress();
-		Driveable robot = new OneSensor(40, 40, 1.2f, 0f, 5f);
+		Driveable robot = new OneSensorPlus(40, 40, 1.2f, 0f, 5f);
 		robot.goCalibrate();
 		robot.goDriveRight();
 		

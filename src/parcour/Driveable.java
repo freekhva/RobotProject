@@ -1,4 +1,4 @@
-package Parcour;
+package parcour;
 
 public interface Driveable {
 	public void goDrive(String modus);

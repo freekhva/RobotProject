@@ -1,14 +1,14 @@
-package Parcour;
+package parcour;
 
 import lejos.hardware.Button;
 
-public class LeftParcour {
+public class RightParcour {
 	public static void main(String[] args) {
-		System.out.println("Drive Left");
+		System.out.println("Drive Right");
 		Button.waitForAnyPress();
 		Driveable robot = new OneSensor(40, 40, 1.2f, 0f, 5f);
 		robot.goCalibrate();
-		robot.goDriveLeft();
+		robot.goDriveRight();
 		
 		
 		// 30, 30, 1, 0, 0 = smooth
