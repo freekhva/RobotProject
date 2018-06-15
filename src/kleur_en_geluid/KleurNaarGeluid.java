@@ -1,6 +1,6 @@
 package kleur_en_geluid;
 
-public class KleurNaarGeluid
+public class KleurNaarGeluid // Basis klasse
 {
 	private final long XTRA_DURATION = 400;
 	private String kleur;

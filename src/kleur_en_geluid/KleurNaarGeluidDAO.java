@@ -23,7 +23,7 @@ public class KleurNaarGeluidDAO
 	{
 	}
 	
-	// Maak connectie db
+	// Maak connectie met de db
 	public void MakeConnection() throws InstantiationException, IllegalAccessException, ClassNotFoundException
 	{
 		try 
