@@ -9,7 +9,6 @@ import lejos.utility.Delay;
 
 public class TwoSensor implements Driveable {
 	
-	
 	// Initialize variables
 	int fullPower;
 	int noPower;
